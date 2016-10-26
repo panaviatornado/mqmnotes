@@ -368,7 +368,7 @@ rulewidth=2pt, bgcolor={rgb}{1,1,1}, margin = 10pt}]{remark*}
 
 \begin{document}
 \title{Mathematical Quantum Mechanics\\
-Prof. Heinz Siedentop}
+Prof. Heinz Siedentop \& Dr. Robert Helling}
 \author{Martin Peev}
 \subtitle{Unofficial Lecture Notes}
 \date{}
@@ -396,7 +396,8 @@ At least as important are operators or linear maps $A: \mathcal H \rightarrow \m
 
 
 
-Stern-Gerlach experiment: The Hamiltonian is given by 
+Stern-Gerlach experiment [there was a drawing]: The Hamiltonian of the interaction with the
+magnetic field is given by 
 \[
 	H_{\text{int}} = \bm S \cdot \bm B(x)
 \]
@@ -411,9 +412,9 @@ with
 	0 & -1
 	\end{pmatrix}
 \]
-with the force being proportional to the gradient of the potential, i.e.
+and the force being proportional to the gradient of the potential, i.e.
 \[
-	F \sim \bm S \cdot \nabla B,
+	F \sim -\bm S \cdot \nabla B,
 \]
 hence this experiment discriminates the two eigenspaces of $H_{\text{int}}$.
 
@@ -423,13 +424,16 @@ The two roles of the Hamiltonian are thus
 	\item measuring (splitting the eigenspaces).
 \end{itemize}
 
-$S_z$ is a $2\times 2$ complex matrix, operator on the Hilbert space $\mathbb{C}^2$ everything is simple
+$S_z$ is a $2\times 2$ complex matrix, operator on the Hilbert space $\mathbb{C}^2$. Everything is simple
 \begin{itemize}
 	\item it is hermitean $S_z^\dagger = S_z$
 	\item discrete eigenvalues, solve $S_z \psi = s_z \psi$, with $s_z \in \mathbb{C}$.
-	\item $S_z = \frac{1}{2} \ket{\uparrow}\bra{\uparrow} + \mleft(- \frac{1}{2} \mright) \ket{\downarrow} \bra{\downarrow}$ (weighted sum of eigenprojectors)
+	\item $S_z = \frac{1}{2} \ket{\uparrow}\bra{\uparrow} +
+          \mleft(- \frac{1}{2} \mright) \ket{\downarrow}
+          \bra{\downarrow}$ (weighted sum of eigenprojectors, spectral
+          theorem)
 	\item defined on all of $\mathbb{C}^2$
-	\item norm: maximal |eigenvalue|.
+	\item norm: maximal $|\hbox{eigenvalue}|$.
 \end{itemize}
 
 (Mathematical) problems arise when $\dim \mathcal H = \infty$. In that situation the same points (but in different order )
@@ -450,7 +454,9 @@ $S_z$ is a $2\times 2$ complex matrix, operator on the Hilbert space $\mathbb{C}
 	with $\|k\|^2 = E$ are not square integrable, this problem is associated with the continuous spectrum.
 	
 	Way out: Instead of $A \psi = \lambda \psi$ write $(A - \lambda \id)\psi = 0 $
-	or $A-\lambda \id $ is not invertible, with the last assertion being the most general. Hence we shall define
+	or $A-\lambda \id $ is not invertible, with the last assertion
+        being the more general than the previous in the case of
+        infinite dimensions. Hence we shall define
 	\[
 		\lambda \in \spec(A) :\iff A- \lambda \id \text{ is not invertible}.
 	\]
@@ -499,7 +505,7 @@ $S_z$ is a $2\times 2$ complex matrix, operator on the Hilbert space $\mathbb{C}
 	
 	$\eta_{\phi}$ is usually denoted as ``$A^{\dagger}\phi$". Then 
 	\[
-		A^{\dagger} \phi \longmapsto \eta_{\phi} = A^{\dagger}\phi	
+		A^{\dagger} \colon\phi \longmapsto \eta_{\phi} = A^{\dagger}\phi	
 	\]
 	is linear and \[
 	\mathcal D\mleft( A^{\dagger} \mright) := \mleft\{ \phi \in \mathcal H \, \big| \, f_{\phi} \text{ is bounded} \mright\}
@@ -511,7 +517,7 @@ $S_z$ is a $2\times 2$ complex matrix, operator on the Hilbert space $\mathbb{C}
 \end{enumerate}
 
 \begin{defn}
-	An operator $A$ is called \underline{symmetric} iff 
+	A densely defined operator $A$ is called \underline{symmetric} iff 
 	\[
 		\forall \phi, \psi \in \mathcal D(A): \; \Braket{\phi, A \psi} = \Braket{A\phi,\psi}	
 	\]
@@ -525,8 +531,12 @@ $S_z$ is a $2\times 2$ complex matrix, operator on the Hilbert space $\mathbb{C}
 \end{defn}
 
 \begin{example*}
-	Let $\mathcal H = L^2 \big( [0,1]\big)$ and consider the operator $(p\psi)(x) = i \overline{\psi'(x)}$ atleast for \[
-	\mathcal D(p) = \mathscr C_a := \mleft\{ f \in \mathcal H \, \big| \, f \text{ absolutely continuous with derivative in } \mathcal H \mright\}.	
+       
+        N.B. there is an extended write-up of this example in the file {\tt pextension.pdf}. 
+
+	Let $\mathcal H = L^2 \big( [0,1]\big)$ and consider the
+        operator $(p\psi)(x) = i \overline{\psi'(x)}$ for \[
+	\mathcal D(p) \subset \mathscr C_a := \mleft\{ f \in \mathcal H \, \big| \, f \text{ absolutely continuous with derivative in } \mathcal H \mright\}.	
 	\] Is this operator symmetric?	
 	\[
 		\Braket{\phi,p\psi}=\int\limits_0^1 \bar\phi(x) i \frac{d}{d x} \phi(x) \d x = \underbrace{ \int\limits_0^1 \overline{i \frac{d}{d x} \phi(x)} \phi(x) \d x	}_{ = \Braket{p\phi,\psi}} + i \bar \phi(x) \psi(x) \big|_{0}^1
@@ -564,9 +574,9 @@ This decomposition is unique and defines a map $S: \mathcal D_+ \rightarrow \mat
 
 To see whether the new extended $p_e$ is symmetric for this
 \[
-	0 = \Braket{p^* \mleft(\tilde\psi_+ + S \tilde\psi_+  \mright) , \tilde\psi_+ + S\tilde\psi_+ } - \Braket{ \tilde\psi_+ + S\tilde\psi_+ , p^* \tilde\psi_+ + S\tilde\psi_+} = \cdots = -2 \mleft( \Braket{\tilde\psi_+,\tilde\psi_+} - \Braket{S\tilde\psi_+,S\tilde\psi_+} \mright),
+	0 = \Braket{p^* \mleft(\tilde\psi_+ + S \tilde\psi_+  \mright) , \tilde\psi_+ + S\tilde\psi_+ } - \Braket{ \tilde\psi_+ + S\tilde\psi_+ , p^* \tilde\psi_+ + S\tilde\psi_+} = \cdots = -2i \mleft( \Braket{\tilde\psi_+,\tilde\psi_+} - \Braket{S\tilde\psi_+,S\tilde\psi_+} \mright),
 \]
-	where $p^* \psi_+ = i \psi_+$.
+	where we used $p^* \psi_+ = i \psi_+$.
 	
 	Hence for $p_e$ to be symmetric we need $S$ to be unitary. It turns out that this condition is also sufficient.
 
@@ -580,11 +590,15 @@ We have the freedom to choose a self-adjoint extension for each $S: \mathcal D_+
 	\mathcal D_a = \mleft\{ \psi_+ + S \psi_+ \, \big| \, \psi \in \mathcal D_+ \mright)
 \]
 
-In our case, $\dim \mathcal D_{\pm} = $, so the possible unitary operators are $S_{\alpha}\psi_+ = e^{i \alpha} \psi_-$, for $\alpha \in [0,2\pi)$. Thus for $\psi \in \mathcal D(q) + \mathcal D_a$ we have
+In our case, $\dim \mathcal D_{\pm} = 1$, so the possible unitary operators are $S_{\alpha}\psi_+ = e^{i \alpha} \psi_-$, for $\alpha \in [0,2\pi)$. Thus for $\psi \in \mathcal D(q) + \mathcal D_a$ we have
 \[
 	\psi(0) = e^{i \beta} \psi(1).
 \]
-I.e. $p$ is self-adjoint on the quasi-periodic functions, and thus the spectrum of an extension $p_{\alpha}$, for a given choice of $\alpha$, is $2\pi \mathbb Z + \alpha$.
+I.e. $p$ is self-adjoint on the quasi-periodic functions, and thus the
+spectrum of an extension $p_{\alpha}$, for a given choice of $\alpha$,
+is $2\pi \mathbb Z + \alpha$. As the eigenvalues are the possible
+outcomes of the measurement, we see that the choice of the
+self-adjoint extension has an observable consequence.
 
 \begin{theorem*}[Stone's Theorem]
 		For every self-adjoint operator $A$ there exists a unitary representation $U: \mathbb{R} \rightarrow U (\mathcal H), \; U (t) U(s) = U(t+s) $ such that 
@@ -592,6 +606,11 @@ I.e. $p$ is self-adjoint on the quasi-periodic functions, and thus the spectrum 
 			\forall \psi \in \mathcal D(A): \frac{d}{d t} U(t) \psi \Big|_{t=0} = i A \psi		
 		\]
 \end{theorem*}
+
+If we would not act on quasi-periodic functions, the unitary
+representation acting as translations would shift the wave function
+out of the intergral and thus would not be invertible and in
+particular not unitary.
 
 \newpage
 
@@ -601,7 +620,8 @@ The standard quantum-mechanical ``self-adjoint" operator is $H_0 = - \Delta$. Fo
 	\Braket{\phi,-\Delta \psi} = \sum_{j} \int\limits_{\mathbb{R}^3} \bar\phi(x) \mleft( - \Delta \psi \mright)(x) \d x = \sum_j \int \overline{ \nabla \phi}(x) \cdot \nabla \psi(x) \d x = \sum_j \int \overline{- \Delta \phi}(x)\psi(x) = \Braket{-\Delta \phi , \psi}
 \]
 
-Since $\mathscr C_0^{\infty} \mleft( \mathbb{R}^3 \mright)$ is dense in $L^2 \mleft( \mathbb{R}^3 \mright)$ we can extend this operator to all $L^2\mleft( \mathbb{R}^3 \mright)$.
+Since $\mathscr C_0^{\infty} \mleft( \mathbb{R}^3 \mright)$ is dense
+in $L^2 \mleft( \mathbb{R}^3 \mright)$ this is symmetric.
 
 Other examples of operators are 
 \begin{align*}
@@ -626,7 +646,7 @@ Other examples of operators are
 For $\psi(x):= \frac{1}{\Braket{x}^{3-\alpha}}$ it holds that $\psi \notin L^1$ but $\psi \in L^2$, for $\alpha$ small.
 
 \begin{defn}
-	Let us consider the semi-norm
+	Let us consider the semi-norms
 	\[
 		\|\psi\|_{\alpha, \beta} := \sup_{x \in \mathbb{R}^n} \mleft| x^\alpha \mleft( \partial^\beta \psi \mright)(x) \mright|,	
 	\]
@@ -636,7 +656,9 @@ For $\psi(x):= \frac{1}{\Braket{x}^{3-\alpha}}$ it holds that $\psi \notin L^1$ 
 	\]
 	Then the Schwartz space on $\mathbb{R}^n$ is defined as
 	\[
-		\mathscr S \mleft( \mathbb{R}^n \mright) := \mleft\{ \psi \in \mathbb{C}^{\infty} \mleft( \mathbb{R}^n \mright) \, \big| \, \|\psi\|_{\alpha, \beta} < \infty \mright\},
+		\mathscr S \mleft( \mathbb{R}^n \mright) := \mleft\{
+                \psi \in \mathbb{C}^{\infty} \mleft( \mathbb{R}^n
+                \mright) \, \big|\, \forall \alpha,\beta\colon \|\psi\|_{\alpha, \beta} < \infty \mright\},
 	\]
 	with the complete metric 
 	\[
@@ -655,7 +677,9 @@ We shall define the Fourier transform on $\mathcal S'$ by
 \[
 	\Braket{\mathcal FL , \psi} := \Braket{L, \mathcal F \psi},
 \]
-where $L \in \mathscr S', \psi \in \mathscr S$ and $\Braket{L,\psi}:= L(\psi)$.
+where $L \in \mathscr S', \psi \in \mathscr S$ and $\Braket{L,\psi}:=
+L(\psi)$. This extens what holds for regular distributions
+corresponding to $L^1$-functions.
 
 The delta function $\delta_x : f \mapsto f(x)$ is a continuous functional on $\mathcal S$ since
 \[
@@ -668,11 +692,11 @@ The Fourier transform of the delta function is given by
 i.e. $\mathcal F \delta = \frac{1}{(2\pi)^{\nicefrac{n}{2}}}$.
 
 
-If $g$ is measurable and 
+If $g$ is measurable and decays faster than any power, i.e. 
 \[
 	\exists C \exists M \forall x \in \mathbb{R}^n \mleft| \Braket{x}^{-M} g(x) \mright| < C
 \]
-then let $L_g$ be the functional defined by
+then it gives rise to a {\sl regular} distribution, i.e. let $L_g$ be the functional defined by
 \[
 	\Braket{L_g, \phi}:= \int g(x) \phi(x) \d x
 \]
