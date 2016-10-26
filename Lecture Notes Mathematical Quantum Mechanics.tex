@@ -1,0 +1,712 @@
+\documentclass[12pt]{article}
+\usepackage{titling}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{extpfeil}
+\usepackage{marvosym}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{tabto}
+\usepackage{wasysym}
+\usepackage{textcomp}
+\usepackage{braket}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage[xcolor = RGB, framemethod = TikZ]{mdframed}
+%\usepackage[dvipsnames]{xcolor}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{ragged2e}
+%\usepackage{hhline}
+\usepackage{float}
+%\usepackage{relsize}
+\usepackage{mathrsfs}
+\usepackage[margin=1in]{geometry}
+\usepackage{units}
+%\usepackage{bbm}
+%\usepackage{MnSymbol}
+\usepackage{varwidth}
+\usepackage{titlesec}
+%\usepackage[round,colon,authoryear]{natbib}
+%\usepackage{nth}
+%\usepackage{hyperref}
+%\usepackage[russian]{babel}
+%\usepackage[utf8]{inputenc}
+%\usepackage[T2A,T1]{fontenc}
+%\usepackage[latin, british]{babel}
+
+\usepackage{hyperref}
+\usepackage{mleftright}
+\usepackage{comment}
+\usepackage{tensor}
+\usepackage{siunitx}
+
+
+\usepackage{bm}
+
+
+\numberwithin{equation}{section}
+
+%\titleformat{\subsection}[runin]{\normalfont\large\bfseries}{\thesubsubsection}{1em}{}
+
+\setlength\parindent{0pt}
+
+%\theoremstyle{definition}
+%\newtheorem{prop}{Proposition}
+%\newtheorem{cor}{Corollary}
+%\newtheorem{lemma}{Lemma}
+
+
+%%%%%%%%%%%%
+%%%Colors%%%
+%%%%%%%%%%%%
+
+\colorlet{thmline}{red}
+\definecolor{thmbg}{rgb}{1,0.9,0.9}
+\definecolor{propline}{rgb}{1,0.27,0}
+\definecolor{propbg}{rgb}{1,0.854,0.752}
+\definecolor{corline}{rgb}{0.812,0.325,0}
+\definecolor{corbg}{rgb}{1,0.854,0.752}
+\colorlet{lemline}{orange}
+\definecolor{lembg}{rgb}{1,0.824,0.702}
+\definecolor{exampleline}{rgb}{0,0.898,0.565}
+\colorlet{examplebg}{white}
+\colorlet{defnline}{blue}
+\definecolor{defnbg}{rgb}{0.9,0.9,1}
+\definecolor{remline}{rgb}{1,0.843,0}
+\colorlet{rembg}{white}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%Theorem Styles%%%
+%%%%%%%%%%%%%%%%%%%%
+
+
+
+\mdfdefinestyle{theoremstyle}{
+	middlelinewidth = 3,
+	roundcorner  = 10 pt,
+	leftmargin = -12,
+	rightmargin = -12,
+	backgroundcolor  = thmbg,
+	middlelinecolor = thmline,
+	innertopmargin = -2pt ,
+	splittopskip = \topskip ,
+	ntheorem = true,
+	}
+
+\mdfdefinestyle{propstyle}{
+	middlelinewidth = 3,
+	roundcorner  = 10 pt,
+	leftmargin = -12,
+	rightmargin = -12,
+	backgroundcolor  = propbg,
+	middlelinecolor = propline,
+	innertopmargin = -2pt,
+	splittopskip = \topskip ,
+	ntheorem = true,
+	}
+
+\mdfdefinestyle{corstyle}{
+	middlelinewidth = 3,
+	roundcorner  = 10 pt,
+	leftmargin = -12,
+	rightmargin = -12,
+	backgroundcolor  = corbg,
+	middlelinecolor = corline,
+	innertopmargin = -2pt ,
+	%splittopskip = \topskip ,
+	ntheorem = true,
+	}
+
+\mdfdefinestyle{lemstyle}{
+	middlelinewidth = 3,
+	roundcorner  = 10 pt,
+	leftmargin = -12,
+	rightmargin = -12,
+	backgroundcolor  = lembg,
+	middlelinecolor = lemline,
+	innertopmargin = -2pt ,
+	splittopskip = \topskip ,
+	ntheorem = true,
+	}
+
+\mdfdefinestyle{examplestyle}{
+	middlelinewidth = 3,
+	roundcorner  = 10 pt,
+	leftmargin = -12,
+	rightmargin = -12,
+	backgroundcolor  = examplebg,
+	middlelinecolor = exampleline,
+	%innertopmargin = 0pt ,
+	splittopskip = \topskip ,
+	ntheorem = true,
+	}
+
+\mdfdefinestyle{defnstyle}{
+	middlelinewidth = 3,
+	roundcorner  = 10 pt,
+	leftmargin = -12,
+	rightmargin = -12,
+	backgroundcolor  = defnbg,
+	middlelinecolor = defnline,
+	%innertopmargin = 0pt ,
+	splittopskip = \topskip ,
+	ntheorem = true,
+	}
+
+\mdfdefinestyle{remstyle}{
+	middlelinewidth = 3,
+	roundcorner  = 10 pt,
+	leftmargin = -12,
+	rightmargin = -12,
+	backgroundcolor  = rembg,
+	middlelinecolor = remline,
+	%innertopmargin = 0pt ,
+	splittopskip = \topskip ,
+	ntheorem = true,
+	}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%Theorem Environments%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\theoremstyle{plain}
+\newtheorem{thnum}{Theorem}[section]
+
+
+
+\declaretheoremstyle[bodyfont = \normalfont,
+]{example}
+
+
+
+
+\declaretheorem[sharenumber = thnum, qed = $\square$, 
+preheadhook = {\begin{mdframed}[style = theoremstyle]},
+postfoothook = \end{mdframed}
+]{theorem}
+
+
+\declaretheorem[sharenumber = thnum, name = Proposition, qed = $\square$,
+preheadhook = {\begin{mdframed}[style = propstyle]},
+postfoothook = \end{mdframed}
+]{prop}
+
+\declaretheorem[sharenumber = thnum, name = Corollary, qed = $\square$,
+preheadhook = {\begin{mdframed}[style = corstyle]},
+postfoothook = \end{mdframed}
+]{cor}
+
+\declaretheorem[sharenumber = thnum, name = Lemma, qed = $\square$,
+preheadhook = {\begin{mdframed}[style = lemstyle]},
+postfoothook = \end{mdframed}
+]{lemma}
+
+\declaretheorem[style = example, sharenumber = thnum,
+preheadhook = {\begin{mdframed}[style = examplestyle]},
+postfoothook = \end{mdframed}
+]{example}
+
+\declaretheorem[style = example,sharenumber = thnum, name = Definition, qed = $\square$,
+preheadhook = {\begin{mdframed}[style = defnstyle]},
+postfoothook = \end{mdframed}
+]{defn}
+
+\declaretheorem[style = example, sharenumber = thnum, qed = $\square$,
+preheadhook = {\begin{mdframed}[style = remstyle]},
+postfoothook = \end{mdframed}
+]{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\declaretheorem[numbered = no, qed = $\square$, name = Theorem,
+preheadhook = {\begin{mdframed}[style = theoremstyle]},
+postfoothook = \end{mdframed}
+]{theorem*}
+
+
+\declaretheorem[numbered = no, name = Proposition, qed = $\square$,
+preheadhook = {\begin{mdframed}[style = propstyle]},
+postfoothook = \end{mdframed}
+]{prop*}
+
+\declaretheorem[numbered = no, name = Corollary, qed = $\square$,
+preheadhook = {\begin{mdframed}[style = corstyle]},
+postfoothook = \end{mdframed}
+]{cor*}
+
+\declaretheorem[numbered = no, name = Lemma, qed = $\square$,
+preheadhook = {\begin{mdframed}[style = lemstyle]},
+postfoothook = \end{mdframed}
+]{lemma*}
+
+\declaretheorem[style = example, numbered = no, name = Example,
+preheadhook = {\begin{mdframed}[style = examplestyle]},
+postfoothook = \end{mdframed}
+]{example*}
+
+\declaretheorem[style = example, numbered = no, name = Definition, qed = $\square$, name = Definition,
+preheadhook = {\begin{mdframed}[style = defnstyle]},
+postfoothook = \end{mdframed}
+]{defn*}
+
+\declaretheorem[style = example, numbered = no, qed = $\square$, name = Remark,
+preheadhook = {\begin{mdframed}[style = remstyle]},
+postfoothook = \end{mdframed}
+]{remark*}
+
+
+%Weak Convergence Arrow
+\newextarrow{\xrightharpoon}{0529}{\relbar\relbar\rightharpoonup}
+
+
+
+
+
+\begin{comment}
+
+
+\theoremstyle{plain}
+\newtheorem{thnum}{Theorem}[section]
+
+\declaretheoremstyle[bodyfont = \normalfont,
+%postheadspace=0.5em,
+%mdframed={
+%		backgroundcolor=white, hidealllines=true,
+%		skipabove=0pt, skipbelow=0pt,
+%		innertopmargin=2pt, innerbottommargin=2pt, innerleftmargin=0pt, innerrightmargin=0pt,
+%		}
+]{example}
+\declaretheorem[sharenumber = thnum, qed = $\square$,shaded={rulecolor=Red,
+rulewidth=2pt, bgcolor={rgb}{1,0.9,0.9}, margin = 10pt}]{theorem}
+\declaretheorem[sharenumber = thnum, name = Proposition, qed = $\square$,shaded={rulecolor=RedOrange,
+rulewidth=2pt, bgcolor={rgb}{1,0.854,0.752}, margin = 10pt}]{prop}
+\declaretheorem[sharenumber = thnum, name = Corollary, qed = $\square$,shaded={rulecolor=BurntOrange,
+rulewidth=2pt, bgcolor={rgb}{1,0.854,0.752}, margin = 10pt}]{cor}
+\declaretheorem[sharenumber = thnum, name = Lemma, qed = $\square$,shaded={rulecolor=Orange,
+rulewidth=2pt, bgcolor={rgb}{1,0.824,0.702}, margin = 10pt}]{lemma}
+\declaretheorem[style = example, sharenumber = thnum,shaded={rulecolor=SpringGreen,
+rulewidth=2pt, bgcolor={rgb}{1,1,1}, margin = 10pt}]{example}
+\declaretheorem[style = example,sharenumber = thnum, name = Definition, qed = $\square$,shaded={rulecolor=Blue,
+rulewidth=2pt, bgcolor={rgb}{0.9,0.9,1}, margin = 10pt}]{defn}
+\declaretheorem[style = example, sharenumber = thnum, qed = $\square$,shaded={rulecolor=Goldenrod,
+rulewidth=2pt, bgcolor={rgb}{1,1,1}, margin = 10pt}]{remark}
+
+\declaretheorem[numbered = no, qed = $\square$, name = Theorem]{theorem*}
+\declaretheorem[numbered = no, name = Proposition, qed = $\square$,shaded={rulecolor=RedOrange,
+rulewidth=2pt, bgcolor={rgb}{1,0.854,0.752}, margin = 10pt}]{prop*}
+\declaretheorem[numbered = no, name = Corollary, qed = $\square$,shaded={rulecolor=BurntOrange,
+rulewidth=2pt, bgcolor={rgb}{1,0.854,0.752}, margin = 10pt}]{cor*}
+\declaretheorem[numbered = no, name = Lemma, qed = $\square$,shaded={rulecolor=Orange,
+rulewidth=2pt, bgcolor={rgb}{1,0.824,0.702}, margin = 10pt}]{lemma*}
+\declaretheoremstyle[numbered = no, bodyfont = \normalfont]{example*}
+\declaretheorem[style = example*, name = Example,qed = $\square$,shaded={rulecolor=lime,
+rulewidth=2pt, bgcolor={rgb}{1,1,1}, margin = 10pt}]{example*}
+\declaretheorem[style = example*, name = Definition, qed = $\square$,shaded={rulecolor=Blue,
+rulewidth=2pt, bgcolor={rgb}{0.9,0.9,1}, margin = 10pt}]{defn*}
+\declaretheorem[style = example*, name = Remark, qed = $\square$,shaded={rulecolor=Goldenrod,
+rulewidth=2pt, bgcolor={rgb}{1,1,1}, margin = 10pt}]{remark*}
+
+\end{comment}
+
+
+
+
+\newcommand{\nin}{\notin}
+
+\renewcommand{\baselinestretch}{1.3}
+
+\renewcommand{\d}{\mathrm{d}\hspace{-0.025cm}}
+\renewcommand\qedsymbol{\textit{q.e.d.}}
+
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\theta}{\vartheta}
+\renewcommand{\cong}{\simeq}
+
+\DeclareMathOperator*{\esssupp}{ess \, supp}
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator{\intr}{int}
+\DeclareMathOperator*{\esssup}{ess \, sup}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\rnk}{rnk}
+\DeclareMathOperator{\loc}{loc}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\img}{img}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\euc}{Eucl}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\spec}{spec}
+
+
+
+\let\Re\relax
+\DeclareMathOperator{\Re}{\frak R}
+
+\newcommand{\bitext}[1]{\textit{\textbf{#1}}}
+
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+%\renewcommand{\proofname}{\textit{Proof.}}
+
+
+\makeindex
+
+\begin{document}
+\title{Mathematical Quantum Mechanics\\
+Prof. Heinz Siedentop}
+\author{Martin Peev}
+\subtitle{Unofficial Lecture Notes}
+\date{}
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\setcounter{section}{-1}
+
+\section{Review of Quantum Mechanics}
+
+A state is a non-zero $\psi \in \mathcal H$ where $\mathcal H$ is a Hilbert space. Actually it is an equivalence class with 
+\[
+	\psi_1 \sim \psi_2 \iff \exists c \in \mathbb{C}^*: c \psi_1 = \psi_2,
+\]
+so actually it is a ray in $\mathcal H$.
+
+Further the Hilbert space is a $\mathbb{C}$-vector space with a positive definite hermitean inner product $\Braket{\cdot, \cdot}: \mathcal H^2 \rightarrow \mathbb{C}$, that is linear in the second slot, which induces a norm $\|\psi\| = \sqrt{\Braket{\psi,\psi}}$, which makes $\mathcal H$ into a complete normed space.
+
+At least as important are operators or linear maps $A: \mathcal H \rightarrow \mathcal H$.
+
+
+
+Stern-Gerlach experiment: The Hamiltonian is given by 
+\[
+	H_{\text{int}} = \bm S \cdot \bm B(x)
+\]
+$B$ is mostly in $z$-direction hence we get
+\[
+	\bm B \cdot \bm S \approx \bm B(x) S_z, 
+\]
+with
+\[
+	S_z = \frac{1}{2} \begin{pmatrix}
+	1 & 0\\
+	0 & -1
+	\end{pmatrix}
+\]
+with the force being proportional to the gradient of the potential, i.e.
+\[
+	F \sim \bm S \cdot \nabla B,
+\]
+hence this experiment discriminates the two eigenspaces of $H_{\text{int}}$.
+
+The two roles of the Hamiltonian are thus
+\begin{itemize}
+	\item giving the time evolution,
+	\item measuring (splitting the eigenspaces).
+\end{itemize}
+
+$S_z$ is a $2\times 2$ complex matrix, operator on the Hilbert space $\mathbb{C}^2$ everything is simple
+\begin{itemize}
+	\item it is hermitean $S_z^\dagger = S_z$
+	\item discrete eigenvalues, solve $S_z \psi = s_z \psi$, with $s_z \in \mathbb{C}$.
+	\item $S_z = \frac{1}{2} \ket{\uparrow}\bra{\uparrow} + \mleft(- \frac{1}{2} \mright) \ket{\downarrow} \bra{\downarrow}$ (weighted sum of eigenprojectors)
+	\item defined on all of $\mathbb{C}^2$
+	\item norm: maximal |eigenvalue|.
+\end{itemize}
+
+(Mathematical) problems arise when $\dim \mathcal H = \infty$. In that situation the same points (but in different order )
+
+
+\underline{By example:}
+\begin{enumerate}
+	\item[1)] Eigenvalue equation $A\psi = a \psi$ can have no non-trivial solution in $\mathcal H$, e.g.
+	\[
+		- \Delta \psi = E \psi \qquad \text{in  } \mathcal H = L^2 \mleft( \mathbb{R}^n \mright).	
+	\]
+	is only solved by $\psi = 0$ in $\mathcal H$.
+	
+	"Plane wave solutions":
+	\[
+		\psi(x) = e^{i k x}	
+	\]
+	with $\|k\|^2 = E$ are not square integrable, this problem is associated with the continuous spectrum.
+	
+	Way out: Instead of $A \psi = \lambda \psi$ write $(A - \lambda \id)\psi = 0 $
+	or $A-\lambda \id $ is not invertible, with the last assertion being the most general. Hence we shall define
+	\[
+		\lambda \in \spec(A) :\iff A- \lambda \id \text{ is not invertible}.
+	\]
+	
+	\item[2)] The norm of $A$ is defined as 
+	\[
+		\|A\|:= \sup_{\psi \in \mathcal H \setminus \{0\}}	\frac{\|A\psi\|}{\|\psi\|} = \sup_{\|\psi\| = 1} = \| A \psi\| \in [0,\infty]
+	\]
+	If $\|A\| = \infty$, $A$ is called \underline{unbounded}. These cause headaches
+	\begin{enumerate}
+	
+	
+	\item[a)] $A$ is not continuous in this case, since
+	\[
+		A \text{ continuous} \iff \|A\|< \infty	
+	\]
+	
+	Fact of life: $[q,p] = i \implies$ at least one of $p,q$ is unbounded.
+	
+	\item[b)] In fact $A$ cannot be defined on all of $\mathcal H$, e.g. for $\mathcal H = L^2(\mathbb{R})$, the position operator is given by 
+	\[
+		(x\psi)(x) = x\psi(x)	
+	\]
+	can leave $\mathcal H$. For example $\psi(x) = \mleft(1+|x| \mright)^{\nicefrac{2}{3}} \in \mathcal H$, but $x \psi(x) = x \mleft(1+|x| \mright)^{\nicefrac{2}{3}} \notin \mathcal H$.
+	
+	Hence we have to worry about the domain of definition $\mathcal D(A)$ of an unbounded operator $A$.
+	Usually, we want $\mathcal D(A)$ to be dense in $\mathcal H$.
+	
+	
+	\end{enumerate}
+	
+	\item[3)] The adjoint operator: A nice poperty of Hilbert spaces is that via the scalar product, they are their own duals, i.e. every linear map $f: \mathcal H \rightarrow \mathbb{C}$ defines a $\phi \in \mathcal H$ such that 
+	\[
+		\forall \psi \in \mathcal H : f(\psi) = \Braket{\phi,\psi}	
+	\]
+	
+	Now take $\phi \in \mathcal H$, such that 
+	\[
+		f_{\phi}: \begin{aligned} \mathcal D(A) &\longrightarrow \mathbb{C}	\\
+			\psi &\longmapsto \Braket{\phi,A\psi}
+		\end{aligned}
+	\]
+	extends to all $\mathcal H$ or equivalently is bounded.
+	
+	Then there is $\eta_{\phi} \in \mathcal H$ such that $f_{\phi}(\psi) = \Braket{\eta_{\phi},\psi}$.
+	
+	$\eta_{\phi}$ is usually denoted as ``$A^{\dagger}\phi$". Then 
+	\[
+		A^{\dagger} \phi \longmapsto \eta_{\phi} = A^{\dagger}\phi	
+	\]
+	is linear and \[
+	\mathcal D\mleft( A^{\dagger} \mright) := \mleft\{ \phi \in \mathcal H \, \big| \, f_{\phi} \text{ is bounded} \mright\}
+	\]
+	(i.e. you are not free to choose!)
+	
+	In Quantum mechanics on learns that \underline{self-adjoint} operators have a real spectrum and are potential observables. However, now we have to worry whether $\mathcal D(A) \overset{?}{=} \mathcal D\mleft(A^{\dagger}\mright)$.
+	
+\end{enumerate}
+
+\begin{defn}
+	An operator $A$ is called \underline{symmetric} iff 
+	\[
+		\forall \phi, \psi \in \mathcal D(A): \; \Braket{\phi, A \psi} = \Braket{A\phi,\psi}	
+	\]
+	Note that this only says that $A^{\dagger}\big|_{\mathcal D(A)} = A$ (that $\mathcal D(A) \subset \mathcal D \mleft( A^{\dagger} \mright)$ is already implied by the definition). However, it could be that $\mathcal D \mleft( A^{\dagger} \mright) \supsetneq \mathcal D \mleft( A \mright)$.
+	
+	A symmetric operator $A$ is called \underline{self-adjoint} iff 
+	\[
+		\mathcal D\mleft(A^{\dagger}\mright) = \mathcal D(A).	
+	\]	
+	
+\end{defn}
+
+\begin{example*}
+	Let $\mathcal H = L^2 \big( [0,1]\big)$ and consider the operator $(p\psi)(x) = i \overline{\psi'(x)}$ atleast for \[
+	\mathcal D(p) = \mathscr C_a := \mleft\{ f \in \mathcal H \, \big| \, f \text{ absolutely continuous with derivative in } \mathcal H \mright\}.	
+	\] Is this operator symmetric?	
+	\[
+		\Braket{\phi,p\psi}=\int\limits_0^1 \bar\phi(x) i \frac{d}{d x} \phi(x) \d x = \underbrace{ \int\limits_0^1 \overline{i \frac{d}{d x} \phi(x)} \phi(x) \d x	}_{ = \Braket{p\phi,\psi}} + i \bar \phi(x) \psi(x) \big|_{0}^1
+	\]
+	Since the last term has to equal 0, for $p$ to be symmetric, we have to impose the condition $\psi(0) = \psi(1) = 0$ so actually 
+	\[
+		\mathcal D(p) = \mleft\{ \psi \in \mathscr C_{a} \, \big| \, \psi|_{\{0,1\}} = 0 \mright\} 	
+	\]
+	Imposing these boundary conditions on $\psi$ makes it unnecessary for $\phi$, hence $\mathcal D\mleft(A^{\dagger}\mright) \supsetneq \mathcal D(A)$.
+	
+	One eigenvalue of the operator $p^{\dagger}$ is $\pm i$, since
+	\[
+		i \frac{d}{d x} \phi = \pm i \phi	\implies \phi = e^{\pm i x} \in \mathscr C_a.
+	\]
+	In particular we get that $\mathcal D \mleft(p^*\mright) = \mathscr C_a$.
+	
+	However, this means that $p^* \psi_{\pm} = \pm i \psi_{\pm}$	which means that $\Braket{\psi,p^*\psi}$ is not necessarily real, i.e. $p^*$ is not an observable. 
+	
+	We observe that $\dim \mathcal{D}(p^*)/\mathcal{D}(p) = 2$.
+	
+	$\mathcal D_{\pm} = \mleft\{ \text{eigenspace of eigenvalue }\pm i \mright\}$
+	
+\end{example*}
+
+To solve this problem a possible strategy is to enlarge $\mathcal D(p)$ by a one-dimensional subspace of $\mathcal{D}(p^*)$, $\mathcal D(p_e)$ such that $\mathcal D(p_e^*) = \mathcal D (p_e)$.
+
+We have to find to find a good one dimensional subspace $\mathcal D_a$ of $\mathcal D_+ \oplus \mathcal{D}_-$. Hence let 
+\[
+	\psi \in \mathcal D_a \; \qquad \psi = \tilde \psi_+ + \tilde \psi_i, \quad \tilde\psi_{\pm} \in \mathcal D_{\pm}.
+\]
+This decomposition is unique and defines a map $S: \mathcal D_+ \rightarrow \mathcal{D}_-$ such that
+\[
+	\tilde\psi_+ \in\mathcal{D}_+ \implies \tilde\psi_+ + S\mleft( \tilde\psi_+ \mright) \in \mathcal D_a.
+\]
+
+To see whether the new extended $p_e$ is symmetric for this
+\[
+	0 = \Braket{p^* \mleft(\tilde\psi_+ + S \tilde\psi_+  \mright) , \tilde\psi_+ + S\tilde\psi_+ } - \Braket{ \tilde\psi_+ + S\tilde\psi_+ , p^* \tilde\psi_+ + S\tilde\psi_+} = \cdots = -2 \mleft( \Braket{\tilde\psi_+,\tilde\psi_+} - \Braket{S\tilde\psi_+,S\tilde\psi_+} \mright),
+\]
+	where $p^* \psi_+ = i \psi_+$.
+	
+	Hence for $p_e$ to be symmetric we need $S$ to be unitary. It turns out that this condition is also sufficient.
+
+
+In the general case we also have 
+\[
+	\mathcal D \mleft( A \mright) \oplus \mathcal D_+ \oplus \mathcal D_- = \mathcal{D} \mleft(A^+ \mright).
+\]
+We have the freedom to choose a self-adjoint extension for each $S: \mathcal D_+ \rightarrow \mathcal D_-$ unitary. Then 
+\[
+	\mathcal D_a = \mleft\{ \psi_+ + S \psi_+ \, \big| \, \psi \in \mathcal D_+ \mright)
+\]
+
+In our case, $\dim \mathcal D_{\pm} = $, so the possible unitary operators are $S_{\alpha}\psi_+ = e^{i \alpha} \psi_-$, for $\alpha \in [0,2\pi)$. Thus for $\psi \in \mathcal D(q) + \mathcal D_a$ we have
+\[
+	\psi(0) = e^{i \beta} \psi(1).
+\]
+I.e. $p$ is self-adjoint on the quasi-periodic functions, and thus the spectrum of an extension $p_{\alpha}$, for a given choice of $\alpha$, is $2\pi \mathbb Z + \alpha$.
+
+\begin{theorem*}[Stone's Theorem]
+		For every self-adjoint operator $A$ there exists a unitary representation $U: \mathbb{R} \rightarrow U (\mathcal H), \; U (t) U(s) = U(t+s) $ such that 
+		\[
+			\forall \psi \in \mathcal D(A): \frac{d}{d t} U(t) \psi \Big|_{t=0} = i A \psi		
+		\]
+\end{theorem*}
+
+\newpage
+
+
+The standard quantum-mechanical ``self-adjoint" operator is $H_0 = - \Delta$. For $\psi \in \mathscr C_0^{\infty} \mleft( \mathbb{R}^3 \mright)$ we have
+\[
+	\Braket{\phi,-\Delta \psi} = \sum_{j} \int\limits_{\mathbb{R}^3} \bar\phi(x) \mleft( - \Delta \psi \mright)(x) \d x = \sum_j \int \overline{ \nabla \phi}(x) \cdot \nabla \psi(x) \d x = \sum_j \int \overline{- \Delta \phi}(x)\psi(x) = \Braket{-\Delta \phi , \psi}
+\]
+
+Since $\mathscr C_0^{\infty} \mleft( \mathbb{R}^3 \mright)$ is dense in $L^2 \mleft( \mathbb{R}^3 \mright)$ we can extend this operator to all $L^2\mleft( \mathbb{R}^3 \mright)$.
+
+Other examples of operators are 
+\begin{align*}
+	H_z &= - \Delta - \frac{z}{\|x\|}\\
+	H & = - \Delta + x^2\\
+	H& = - \Delta - \alpha \chi_M
+\end{align*}
+
+\begin{defn}[Fourier Transform]
+	The Fourier transform of $\psi \in L^1\mleft( \mathbb R^n \mright) $ is given by 
+	\[
+		\mleft(\mathcal F \psi \mright)(\xi) = \frac{1}{\mleft(2\pi \mright)^{\nicefrac{n}{2}}} \int\limits_{\mathbb{R}^n} e^{- i \xi \cdot x} \psi(x) \d x 
+	\]
+\end{defn}
+
+\begin{defn}[Japanese Symbol]
+	\[
+		\Braket{x} = \sqrt{1+\|x\|^2}	
+	\]
+\end{defn}
+
+For $\psi(x):= \frac{1}{\Braket{x}^{3-\alpha}}$ it holds that $\psi \notin L^1$ but $\psi \in L^2$, for $\alpha$ small.
+
+\begin{defn}
+	Let us consider the semi-norm
+	\[
+		\|\psi\|_{\alpha, \beta} := \sup_{x \in \mathbb{R}^n} \mleft| x^\alpha \mleft( \partial^\beta \psi \mright)(x) \mright|,	
+	\]
+	with $\alpha, \beta \in \mathbb{N}_0^{n}$, where 
+	\[
+		x^\alpha= x^{\alpha_1}_1 \cdots x^{\alpha_n}_n, \quad \partial^\beta := \partial^{\alpha_1}_1	\cdots \partial^{\alpha_n}_n.
+	\]
+	Then the Schwartz space on $\mathbb{R}^n$ is defined as
+	\[
+		\mathscr S \mleft( \mathbb{R}^n \mright) := \mleft\{ \psi \in \mathbb{C}^{\infty} \mleft( \mathbb{R}^n \mright) \, \big| \, \|\psi\|_{\alpha, \beta} < \infty \mright\},
+	\]
+	with the complete metric 
+	\[
+		d(\psi,\phi) := \sum_{\alpha, \beta \in \mathbb{N}^n} 2^{-|\alpha|-|\beta|}	\frac{\|\psi-\phi\|_{\alpha,\beta}}{1+\|\psi-\phi\|_{\alpha,\beta}}.
+	\]
+\end{defn}
+\begin{defn}[Tempered Distributions]
+	The dual space of $\mathscr{S}$, 
+	\[
+		\mathscr{S}' := \mleft\{ T : \mathscr{S}\mleft(\mathbb{R}^n \mright) \rightarrow \mathbb{C} \, \big| \, \text{linear, continuous} \mright\}	
+	\]
+	is called the space of tempered distributions.
+\end{defn}
+
+We shall define the Fourier transform on $\mathcal S'$ by 
+\[
+	\Braket{\mathcal FL , \psi} := \Braket{L, \mathcal F \psi},
+\]
+where $L \in \mathscr S', \psi \in \mathscr S$ and $\Braket{L,\psi}:= L(\psi)$.
+
+The delta function $\delta_x : f \mapsto f(x)$ is a continuous functional on $\mathcal S$ since
+\[
+	\forall \psi \in S: \mleft| \delta_x f \mright| = |f(x)| \leqslant \|f\|_{0,0}.
+\]
+The Fourier transform of the delta function is given by
+\[
+	\Braket{\mathcal F \delta , \phi} = \Braket{\delta, \hat \phi} = \hat \phi(0) = \frac{1}{\mleft(2\pi \mright)^{\nicefrac{n}{2}}} \int e^{i 0 x} \phi(x) \d x = \Braket{\frac{1}{(2\pi)^{\nicefrac{n}{2}}}, \phi},
+\]
+i.e. $\mathcal F \delta = \frac{1}{(2\pi)^{\nicefrac{n}{2}}}$.
+
+
+If $g$ is measurable and 
+\[
+	\exists C \exists M \forall x \in \mathbb{R}^n \mleft| \Braket{x}^{-M} g(x) \mright| < C
+\]
+then let $L_g$ be the functional defined by
+\[
+	\Braket{L_g, \phi}:= \int g(x) \phi(x) \d x
+\]
+for all $\phi \in \mathscr S\mleft(\mathbb{R}^n \mright)$.
+One has to check that 
+\begin{enumerate}
+	\item[1)] $L_g$ is a continuous functional.
+	\item[2)] $L_g$ with $g \in L^2 \mleft( \mathbb{R}^n \mright)$ is a tempered distribution.
+\end{enumerate}
+
+
+\begin{defn}[Sobolev space]
+	A Sobolev space 
+	\[
+		H^{\alpha} \mleft( \mathbb{R}^d \mright) = \mleft\{	\psi \, \big| \, \mleft\| \Braket{\xi}^{\alpha} \hat\psi \mright\|_{L^2} < \infty \mright\}.
+	\]
+	Further we define 
+	\begin{align*}
+		H^1 \mleft( \mathbb{R}^n \mright): \Braket{\phi,\psi}_{H_1} := \int \Braket{\xi}^2 \overline{\hat\phi}(\xi) \overline{\psi}(\xi) \d \xi \\
+		H^2 \mleft( \mathbb{R}^n \mright): \Braket{\phi,\psi}_{H_2} := \int \Braket{\xi}^4 \overline{\hat\phi}(\xi) \hat\psi(\xi) \d \xi
+	\end{align*}
+\end{defn}
+
+On this space we can define the Hamiltonian 
+\[
+	-\Delta : \begin{aligned}
+		H^2 \mleft( \mathbb{R}^n \mright) \subset L^2 \mleft( \mathbb{R}^n \mright) &\longrightarrow L^2 \mleft(\mathbb{R}^n \mright)\\
+		\psi & \longmapsto \mathcal F^{-1} \mleft( |\cdot|^2 \hat\psi \mright)
+	\end{aligned}
+\]
+
+Check that this is sefl-adjoint under the assumption that $F$ is unitary.
+\[
+	-\Delta: \mathcal{F}^-1 |\xi|^2 \mathcal F
+\]
+
+\end{document}
