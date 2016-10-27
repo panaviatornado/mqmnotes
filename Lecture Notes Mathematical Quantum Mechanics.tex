@@ -728,9 +728,158 @@ On this space we can define the Hamiltonian
 	\end{aligned}
 \]
 
-Check that this is sefl-adjoint under the assumption that $F$ is unitary.
+Check that this is self-adjoint under the assumption that $F$ is unitary.
+%\[
+%	-\Delta: \mathcal{F}^-1 |\xi|^2 \mathcal F
+%\]
+
+\begin{defn}[Positivity]
+	We say that $A$ is positive $A \geqslant 0$ iff
+	\[
+		\forall \psi \in \mathcal D(A) : \Braket{\psi, A \psi} \geqslant 0.	
+	\] 
+	In particular a positive operator is always symmetric.
+\end{defn}
+
+
+\begin{defn}
+	Suppose that $A$ is self-adjoint in $\mathcal G$. Let 
+	\[
+		\mathcal Q(A) := \mathcal D \mleft( |A|^{\nicefrac{1}{2}} \mright),	
+	\]
+	be the quadratic form domain.
+\end{defn}
+
+\begin{example*}
+	\begin{align*}
+		\mathcal Q (-\Delta) &= \mathcal D \mleft( \mleft(-\Delta \mright)^{\nicefrac{1}{2}} \mright) = \mathcal D \mleft( \mathcal F^{-1} |\xi| \mathcal F \mright) = \mleft\{ \psi \in L^2 \mleft(\mathbb{R}^3 \mright) \, \middle| \, \int_{\mathbb{R}^n} \mleft(1+|\xi|\mright)^2 \mleft| \hat\psi (\xi) \mright|^2 < \infty \mright\} =	\\&= H^1 \mleft( \mathbb{R}^n \mright)
+	\end{align*}
+\end{example*}
+
+\begin{defn}
+
+	For $A \geqslant 0$ let $\Braket{|A|^{\nicefrac{1}{2}}\psi , |A|^{\nicefrac{1}{2}} \psi} = \Braket{\psi,A\psi}$ is the quadratic form associated to $A$.
+	
+	Thus $\mathcal Q(A)$ is the natural domain of the quadratic form.
+
+\end{defn}
+
+\begin{remark}[Question]
+
+If we have a quadratic form, does this maybe determine a self-adjoint operator?
+
+\end{remark}
+
+\begin{theorem}[Friederichs]
+	Suppose that $A: \mathcal D(A) \subset \mathcal G \rightarrow  \mathcal G$ is symmetric.
+	
+	If there exists a constant $c \in \mathbb{R}$ such that $A \geqslant c$, then there exists a distinguished (only one) self-adjoined extension $A_{\text{ext}}$ of $A$ such that $A_{\text{ext}} \geqslant c$ and
+	\[
+		\mathcal Q(A_{\text{ext}})=\mathcal  Q \mleft( A_{\text{ext}} - c +1 \mright) \supset \mathcal Q(A).	
+	\]
+	where we mean by extension that for all $\psi \in \mathcal D(A): A_{\text{ext}} \psi = A \psi$. 
+\end{theorem}
+
+\begin{example*}
+\begin{enumerate}
+
+	\item[1)] Let $\mu^{\text{th}}$ partial derivative be denoted by 
+	\[
+		\partial_{\mu}: \mathscr C^{\infty}_0 \mleft( \mathbb{R}^n \mright) \longrightarrow L^2 \mleft( \mathbb{R}^n \mright)	
+	\]
+	and further consider the operator 
+	\[
+		A:= - \partial_\mu^2 = \mathscr C_0^{\infty} \mleft( \mathbb{R}^n \mright) \longrightarrow L^2 \mleft( \mathbb{R}^n \mright)
+	\]
+	To check that $A$ is positive let $\phi,\psi \in \mathscr C_0^{\infty} \mleft( \mathbb{R}^n \mright)$ and calculate
+	\[
+		\Braket{\phi, A \psi} = \Braket{\phi, - \partial_\mu^2 \psi} = \int\limits_{\mathbb{R}^n} \overline{\phi(x)} (-1) \mleft( \partial_\mu^2 \psi \mright) (x) \d x = \int\limits_{\mathbb{R}^n} \overline{\partial_\mu \phi(x)} \partial_\mu \psi(x)	 \d x,
+	\]
+	hence $\Braket{\psi, A \psi} \geqslant 0$, therefore $A \geqslant 0$ and thus symmetric.
+	
+	Friedrichs theorem now tells us that there exists a unique self adjoint extension of $A_{\text{ext}} \geqslant 0$ of $\partial_\mu^2$. It is an exercise to show that 
+	\[
+		A_{\text{ext}} =\mathcal F^{-1}\mleft( |\xi|^2\hat\psi \mright)
+	\] 
+	
+	\item[2)] Let $H = - \Delta - \lambda \chi_B$. This operator is obviously defined on $\mathscr C^{\infty}_0\mleft( \mathbb{R}^n \mright)$, since \\ $\int |-\Delta \psi|^2 \d x < \infty$ and $\lambda^2 \int_B |\psi|^2 < \infty$. Further it is symmetric and 
+	\[
+		H \geqslant - \Delta,	
+	\]
+	because 
+	\[
+		\Braket{\psi, H \psi} = \int \mleft|\nabla \psi \mright|^2 \d x - \lambda \int\limits_B |\psi|^2 \d x	\geqslant \Braket{\psi, - \Delta \psi},
+	\]
+	hence we may use Friedrichs Theorem.
+	\item $H = - \Delta + c |x|^2\geqslant 0$, for $c \geqslant 0$. This operator is positive and therefore extendable by Friedrich
+	\item $H_h = -\Delta - \frac{z}{|x|}$. 
+	
+	We claim that $H_h$ is symmetric on $\mathscr C^{\infty}_0 \mleft( \mathbb{R}^3 \mright)$. To prove this let $\psi \in \mathscr C_0^{\infty}$.
+	\[
+		\int\limits_{\mathbb{R}^3} |-\Delta \psi|^2 \d x = \int\limits_{|x| \leqslant M} |-\Delta \psi|^2 \d x \leqslant \|-\Delta \psi \|^2_{\infty} \int\limits_{|x|\leqslant M} \int \d x = 	\|-\Delta \psi \|_{\infty}  \frac{4\pi}{3} M^3,
+	\]
+	for $M > 0$ such that $\supp \psi \subset B_R$. Further we have 
+	\[
+		\int\limits_{\mathbb{R}^3}\mleft| - \frac{z}{|x|} \psi \mright|^2 = \int\limits_{|x|\leqslant M} \mleft| - \frac{z}{|x|} \psi(x) \mright|^2 = z^2 \|\psi\|_{\infty}^2 \int\limits_{|x| \leqslant M} \frac{1}{|x|^2} \d x = 4 \pi  z^2 \|\psi\|_{\infty}^2 < \infty.
+	\]
+	Obviously $\psi$ is symmetric since 
+	\[
+		\Braket{\psi, H_h \psi} = \int \mleft( \bar \psi (-\Delta \psi) - \frac{z}{|x|}|\psi|^2 \mright) \d x	
+	\]
+	To sow that $\psi$ is bounded from below we will need the following lemma.	
+	
+	Applying that to $H_h$ we get 
+	\begin{align*}
+		\mathcal E[\psi] &= \int\limits_{\mathbb{R}^3} \mleft( |\nabla \psi|^2 - \frac{z}{|x|}|\psi|^2 \mright) \d x 	= \int\limits_{|x|< R } \mleft( |\nabla \psi|^2 - \frac{z |x|}{|x|^2}|\psi|^2 \mright) \d x + \int\limits_{|x|\geqslant R} \mleft( |\nabla \psi|^2 - \frac{z}{|x|}|\psi|^2 \mright) \d x \geqslant \\
+		& \geqslant \int\limits_{|x|< R} \mleft( |\nabla \psi|^2 - \frac{z R}{|x|^2}|\psi|^2 \mright) \d x + \int\limits_{|x|\geqslant R} |\nabla \psi|^2 \d x - \frac{z}{R} \int\limits_{\mathbb{R}^3} |\psi|^2 \d x \stackrel{R = \frac{1}{4z}}{=\joinrel=}\\
+		&= \int\limits_{\mathbb{R}^3} |\nabla \psi|^2 -  \frac{1}{4} \int\limits_{|x|< \frac{1}{4z}} \frac{1}{|x|^2} |\psi(x)|^2 \d x - 4 z^2 \int\limits_{\mathbb{R}^3} |\psi|^2 \d x \geqslant \\
+		& \geqslant \int\limits_{\mathbb{R}^3} \mleft( |\nabla \psi|^2 - \frac{1}{4}\frac{1}{|x|^2}|\psi(x)|^2 \mright) \d x - 4 z^2 \int\limits_{\mathbb{R}^3} |\psi|^2 \d x \geqslant -16 \frac{z^2}{4} \|\psi\|^2,
+	\end{align*}
+	hence by Friedrichs thoerem we can extend $H_h$.
+	
+\end{enumerate}
+\end{example*}
+
+\begin{lemma}[Hardy Inequality or Quantum Mechanical uncertainty principle]
+	\[
+		\int\limits_{\mathbb{R}^3} |\nabla\psi|^2 \d x \geqslant \frac{1}{4} \int\limits_{\mathbb{R}^3} \frac{|\psi(x)|^2}{|x|^2} \d x 	
+	\]
+	for $\psi \in \mathscr S\mleft( \mathbb{R}^3 \mright)$.
+\end{lemma}
+
+\begin{example*}[Relativistic Hamiltonians]
+	Using the relativistic kinetic energy expression $E = \sqrt{c^2 p^2 + m^2 c^4}$ we can define the relativistic Hamiltonian to be 
+	\[
+		\sqrt{p^2c^2 + m^2c^4} \psi := \mathcal F^{-1} \mleft( \sqrt{c^2 \hbar^2 \xi^2 + m^2c^4} \hat\psi \mright)	
+	\]
+	for $\psi \in \mathscr S \mleft( \mathbb{R}^n \mright)$.
+	
+	We now define the Chandrasekhar Hydrogen Hamiltonian to be 
+	\[
+		C_h = \sqrt{c^2 p^2 + m^2 c^4} - \frac{z}{|x|} \cong m c^2 \mleft( \sqrt{p^2 +1} - \frac{z \alpha}{|x|} \mright),	
+	\]
+	with $\alpha:= \frac{1}{\hbar c}$. From now on we shall use units such that $c = \hbar = 1$, i.e.
+	\[
+		C= \sqrt{p^2 +1} - \frac{\gamma}{|x|}.
+	\]
+	using the following lemma we get 
+	\[
+		|p| +1 \geqslant C - \sqrt{p^2 +1} \geqslant |p|,	
+	\]
+	Boundedness from below of $\mathscr C$ therefore is equivalent to showing that 
+	\[
+		|p| - \frac{\gamma}{|x|}	
+	\]
+	is bounded from below.x`
+\end{example*}
+
+\begin{lemma}[Kato, Herbst]
+For $\psi \in \mathscr S \mleft( \mathbb{R}^3 \mright)$ we have the inequality 
 \[
-	-\Delta: \mathcal{F}^-1 |\xi|^2 \mathcal F
+	\int\limits_{\mathbb{R}^3} |\xi| \mleft| \hat\psi(\xi) \mright|^2 \d x \geqslant \frac{2}{\pi} \int\limits_{\mathbb{R}^3} \frac{1}{|x|}|\psi(x)|^2 \d x
 \]
+\end{lemma}
+
+
 
 \end{document}
