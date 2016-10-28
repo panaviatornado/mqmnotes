@@ -766,7 +766,11 @@ Check that this is self-adjoint under the assumption that $F$ is unitary.
 
 \begin{remark}[Question]
 
-If we have a quadratic form, does this maybe determine a self-adjoint operator?
+If we have a quadratic form, does this maybe determine a self-adjoint
+operator? For matrices this is the case: For vectors $v$ and $w$, you
+can compute every matrix element $\langle v, Aw\rangle$ from the
+knowledge of $\langle v\pm w,A(v\pm w)\rangle$ and $\langle v\pm iw,
+A(v\pm iw)\rangle$ as you can check by expanding.
 
 \end{remark}
 
@@ -802,13 +806,17 @@ If we have a quadratic form, does this maybe determine a self-adjoint operator?
 		A_{\text{ext}} =\mathcal F^{-1}\mleft( |\xi|^2\hat\psi \mright)
 	\] 
 	
-	\item[2)] Let $H = - \Delta - \lambda \chi_B$. This operator is obviously defined on $\mathscr C^{\infty}_0\mleft( \mathbb{R}^n \mright)$, since \\ $\int |-\Delta \psi|^2 \d x < \infty$ and $\lambda^2 \int_B |\psi|^2 < \infty$. Further it is symmetric and 
+        Thus we obtain the appropriate self-adjoint extension of the Laplacian by
+        ``defining it via the Fourier transform'' on $H^2$.
+	\item[2)] Let $H = - \Delta - \lambda \chi_B$ for $\lambda >0$
+          and $\chi_B$ the characteristic function of some
+          (measurable) set $B\subset \mathbb{R}^3$. This operator is obviously defined on $\mathscr C^{\infty}_0\mleft( \mathbb{R}^n \mright)$, since \\ $\int |-\Delta \psi|^2 \d x < \infty$ and $\lambda^2 \int_B |\psi|^2 < \infty$. Further it is symmetric and 
 	\[
-		H \geqslant - \Delta,	
+		H \geqslant - \Delta - \lambda,	
 	\]
 	because 
 	\[
-		\Braket{\psi, H \psi} = \int \mleft|\nabla \psi \mright|^2 \d x - \lambda \int\limits_B |\psi|^2 \d x	\geqslant \Braket{\psi, - \Delta \psi},
+		\Braket{\psi, H \psi} = \int \mleft|\nabla \psi \mright|^2 \d x - \lambda \int\limits_B |\psi|^2 \d x	\geqslant \Braket{\psi, (- \Delta-\lambda) \psi},
 	\]
 	hence we may use Friedrichs Theorem.
 	\item $H = - \Delta + c |x|^2\geqslant 0$, for $c \geqslant 0$. This operator is positive and therefore extendable by Friedrich
@@ -820,13 +828,13 @@ If we have a quadratic form, does this maybe determine a self-adjoint operator?
 	\]
 	for $M > 0$ such that $\supp \psi \subset B_R$. Further we have 
 	\[
-		\int\limits_{\mathbb{R}^3}\mleft| - \frac{z}{|x|} \psi \mright|^2 = \int\limits_{|x|\leqslant M} \mleft| - \frac{z}{|x|} \psi(x) \mright|^2 = z^2 \|\psi\|_{\infty}^2 \int\limits_{|x| \leqslant M} \frac{1}{|x|^2} \d x = 4 \pi  z^2 \|\psi\|_{\infty}^2 < \infty.
+		\int\limits_{\mathbb{R}^3}\mleft| - \frac{z}{|x|} \psi \mright|^2 = \int\limits_{|x|\leqslant M} \mleft| - \frac{z}{|x|} \psi(x) \mright|^2 \le z^2 \|\psi\|_{\infty}^2 \int\limits_{|x| \leqslant M} \frac{1}{|x|^2} \d x = 4 \pi  z^2 \|\psi\|_{\infty}^2 < \infty.
 	\]
 	Obviously $\psi$ is symmetric since 
 	\[
 		\Braket{\psi, H_h \psi} = \int \mleft( \bar \psi (-\Delta \psi) - \frac{z}{|x|}|\psi|^2 \mright) \d x	
 	\]
-	To sow that $\psi$ is bounded from below we will need the following lemma.	
+	To show that $\psi$ is bounded from below we will need the following lemma.	
 	
 	Applying that to $H_h$ we get 
 	\begin{align*}
@@ -870,7 +878,7 @@ If we have a quadratic form, does this maybe determine a self-adjoint operator?
 	\[
 		|p| - \frac{\gamma}{|x|}	
 	\]
-	is bounded from below.x`
+	is bounded from below.
 \end{example*}
 
 \begin{lemma}[Kato, Herbst]
@@ -879,7 +887,7 @@ For $\psi \in \mathscr S \mleft( \mathbb{R}^3 \mright)$ we have the inequality
 	\int\limits_{\mathbb{R}^3} |\xi| \mleft| \hat\psi(\xi) \mright|^2 \d x \geqslant \frac{2}{\pi} \int\limits_{\mathbb{R}^3} \frac{1}{|x|}|\psi(x)|^2 \d x
 \]
 \end{lemma}
-
+This provides boundedness from below only for small enough $Z$.
 
 
 \end{document}
