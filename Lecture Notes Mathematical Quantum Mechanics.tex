@@ -380,7 +380,7 @@ Prof. Heinz Siedentop \& Dr. Robert Helling}
 
 \newpage
 
-\setcounter{section}{-1}
+%\setcounter{section}{-1}
 
 \section{Review of Quantum Mechanics}
 
@@ -613,6 +613,8 @@ out of the intergral and thus would not be invertible and in
 particular not unitary.
 
 \newpage
+
+\section{One-Particle Operators}
 
 
 The standard quantum-mechanical ``self-adjoint" operator is $H_0 = - \Delta$. For $\psi \in \mathscr C_0^{\infty} \mleft( \mathbb{R}^3 \mright)$ we have
@@ -889,5 +891,298 @@ For $\psi \in \mathscr S \mleft( \mathbb{R}^3 \mright)$ we have the inequality
 \end{lemma}
 This provides boundedness from below only for small enough $Z$.
 
+\begin{example*}
+	For the Chandrasekar operator 
+	\[
+		C = \mleft( c^2 p^2 + \mleft( m c^2 \mright)^2 \mright)^{\nicefrac{1}{2}} - \frac{Z e^2}{|x|}	
+	\]
+	we have shown that for all $\psi \in \mathscr S \mleft( \mathbb{R}^3 \mright)$
+	\begin{align*}
+		\mathcal E [\psi] = \int\limits_{\mathbb{R}^3} \mleft( \xi^2 c^2 \hbar^2 + m^2c^4 \mright)^{\nicefrac{1}{2}} |\psi(s)|^2 - \frac{Ze^2}{2\pi^2} \int\limits_{\mathbb{R}^3} \frac{1}{|\xi-\xi'|^2} \overline{\psi(\xi)} \psi(\xi') \d\xi\d\xi' \geqslant 0
+	\end{align*}
+	iff $Z \frac{e^2}{\hbar c} = Z \alpha := \gamma \leqslant \frac{2}{\pi}$. This is equivalent to for all $\psi \in \mathscr S \mleft( \mathbb{R}^3 \mright)$
+	\begin{align*}
+		\int |\xi||\psi(\xi)|^2 \d \xi \geqslant \frac{\gamma}{2\pi^2} \int \frac{1}{|\xi-\xi'|^2} \overline{\psi(\xi)}\psi(\xi') \d \xi \d \xi' \quad \text{iff } \gamma \leqslant \frac{2}{\pi}
+	\end{align*}.
+	Let
+	\[
+		(V\psi)(\xi') = \frac{1}{2\pi^2} \int\limits_{\mathbb{R}^3} \frac{1}{|\xi-\xi'|} \psi(\xi') \d \xi',	
+	\]
+	with
+	\[
+		\frac{2}{\pi} \mleft( V \frac{1}{|\cdot|^2}\mright)(\xi') = \frac{|\xi|}{|\xi|^2}.	
+	\]
+	The quadratic form corresponding to $C$ is 
+	\begin{align*}
+		Q[\psi] &= \int |\xi| |\psi(s)|^2 - \frac{2}{\pi} \frac{1}{2\pi^2} \int \frac{1}{|\xi-\xi'|^2} \overline{\psi(\xi)} \psi(\xi') \d\xi\d\xi'.
+	\end{align*}
+	Let $\psi = f g $, where $g(\xi) = \frac{1}{|\xi|^2}$, then we can rewrite the quadratic form as 
+	\begin{align*}
+		Q[\psi] &= \int |\xi| |\psi(\xi)|^2\d \xi - \frac{1}{2\pi^3} \int \frac{1}{|\xi-\xi'|^2} g(\xi)g(\xi') 2\Re (f(\xi) f(\xi')) \d\xi\d\xi' = \\
+		&=\int |\xi| |\psi(\xi)|^2\d \xi - \frac{1}{2\pi^3} \int \frac{g(\xi)g(\xi')}{|\xi-\xi'|^2}  \mleft(|f(\xi)-f(\xi')|^2 - |f(\xi)|^2-|f(\xi')|^2 \mright) \d\xi\d\xi' =\\
+		&=\int |\xi| |g(\xi)|^2|f(\xi)|^2\d \xi - \int g(\xi') |f(\xi')|^2 \frac{1}{2} (Vg)(\xi) \d\xi' - \int  g(\xi)|f(\xi)| \frac{1}{2} (Vg)(\xi) \d \xi + \\
+		&\quad + \frac{1}{2\pi^3} \int \frac{g(\xi)g(\xi')}{|\xi-\xi'|^2} |f(\xi)-f(\xi')|^2 \d \xi \d \xi' \stackrel{\footnotemark}{=}\\
+		&= \frac{1}{2\pi^3} \int \frac{g(\xi)g(\xi')}{|\xi-\xi'|} |f(\xi)-f(\xi')|^2\d \xi \d \xi'  \geqslant 0
+	\end{align*}
+	\footnotetext{Where we used the expression for $\mleft( V \frac{1}{|\cdot|} \mright)$ with which the extra terms cancel (renaming $\xi \leftrightarrow \xi'$)}
+	Moreover $Q[\psi] = 0$ occurs only for $f$ constant, however $fg$ for $f \neq 0$ is not in $\mathscr S$, so $f =0$. Thus $\mathcal E[\psi] \geqslant 0$ if $\gamma \leqslant\frac{2}{\pi}$ which implies that $C$ can be extended due to Friedrichs to a self-adjoint operator.
+	
+	Note that the argument fails for $\gamma > \frac{2}{\pi}$. The homework will be to find that $\psi \in \mathscr S$ such that $Q[\psi] < 0$ and conclude that it is false that there exists $M$ such that for all $\psi \in \mathscr S$, $\mathcal E[\psi]\geqslant M \|\psi\|^2$.
+	
+	(Physically this means that the particel is eaten by the singularity.)
+\end{example*}
+
+
+\section{Perturbations}
+
+\begin{theorem}[Kato \& Rellich]
+	Let $\mathcal H$ be a Hilbert space, and $A: \mathcal D(A) \subset \mathcal H \rightarrow \mathcal H$ a self-adjoint operator. Let $B : \mathcal D(B) \rightarrow \mathcal{H}$ be a symmetric operator with $\mathcal D(B) \supset \mathcal D(A)$, and let there exist $a<1$ and $b \in \mathbb{R}$ such that for all $\psi \in \mathcal D(A)$ holds
+	\[
+		\|B\psi\| \leqslant a \|A\psi\| + b \|\psi\|.	
+	\]
+	Then 
+	\[
+		A+B:	
+		\begin{aligned}
+			\mathcal D(A) & \longrightarrow \mathcal H\\
+			\psi & \longmapsto A\psi + B\psi
+		\end{aligned}	
+	\]
+	is self-adjoint.
+\end{theorem}
+\begin{remark*}
+	The hypothesis of the above theorem is called $B$ is $A$-bounded with relative bound $a$.
+\end{remark*}
+
+\begin{example*}
+	Consider the hydrogen Hamiltonian 
+	\[
+		H = - \Delta - \frac{Z}{|x|}.	
+	\]
+	We have already proven that $H$ extends to a self-adjoint operator according to Friedrichs, with quadratic from domain
+	\[
+		\mathcal Q(H) \supset \mathscr S\mleft( \mathbb{R}^3 \mright)
+	\]
+	Let $B$ be the potential operator, then the question is whether we can show that 
+	\begin{align*}
+		\|B\psi\| &= \mleft( \int\limits_{\mathbb{R}^3} \mleft| \frac{Z}{|x|} \psi(x) \mright|^2 \mright)^{\nicefrac{1}{2}} = Z 	\mleft( \int \frac{|\psi(x)|^2}{|x|^2} \d x \mright)^{\nicefrac{1}{2}} \leqslant \\ & \stackrel{?}{\leqslant} a \mleft( \int\limits_{\mathbb{R}^3} |(-\Delta \psi)(x)|^2 \d x \mright)^{\nicefrac{1}{2}} + b \mleft( \int\limits_{\mathbb{R}^3} |\psi(x)|^2 \mright)^{\nicefrac{1}{2}}.
+	\end{align*}
+	Let us decompose the potential into 
+	\[
+		\frac{Z}{|x|} = V_{<}(x)+ V_{>}(x) = \frac{Z}{|x|} \chi_{B_R}(x)	+\frac{Z}{|x|} \chi_{B_R^C}(x),	
+	\]
+	where $V_<$ has compact support but also singularity and $V_>$ does not have compact support and no singularity. For this decomposition we get
+	\[
+		\|B\psi\| = \mleft\| V_< \psi + V_> \psi \mright\| \leqslant \mleft\| V_< \psi \mright\| + \mleft\| V_{>} \psi \mright\| \leqslant \mleft\|V_{<} \psi \mright\| + \frac{Z}{R} \|\psi\|,	
+	\]
+	So, $\frac{Z}{|x|}$ is $-\Delta$ -bounded with constant $a$, if and only if $V_<$ is. Thus we have reduced our inquiry to
+	\[
+		\mleft\| V_< \psi \mright\| \stackrel{?}{\leqslant} a \|\Delta \psi\| + b \|\psi\|.	
+	\]  
+	We have \[
+		\|\Delta \psi\| = \| (-\Delta + 1) - 1 \psi \| \geqslant \|(-\Delta +1) \psi\| - \|\psi\|,
+	\]
+	thus it is enough to show that there exists a $a< 1 $ such that for all $\psi \in \mathcal D(-\Delta)$ 
+	\[
+		\|V_< \psi \| \leqslant a \|(-\Delta + 1) \psi\| + b \|\psi\|	
+	\]
+	Let us write $\psi = (-\Delta + 1)^{-1} \phi$ (as $\phi$ runs through $\mathcal H$, $\psi$ runs through $H^2 \mleft( \mathbb{R}^3 \mright)$).
+	\[
+	 	\mleft\|V_{<} \mleft( -\Delta + 1 \mright)^{-1} \phi \mright\| \leqslant a \|\phi\|^2 + b \mleft\| (-\Delta +1)^{-1}\phi \mright\|.	
+	\]
+	
+	The integral kernel of $(-\Delta +1)^{-1}$ is given by	
+	\[
+		(-\Delta +1)^{-1}(x,y) = \frac{e^{-|xy|}}{4\pi|x-y|}	,
+	\]
+	i.e. 
+	\[
+		\mleft(\mleft( -\Delta+1 \mright)^{-1} \psi \mright)(y) = \int \frac{e^{-|x-y|}}{4\pi|x-y|} \psi(x) \d x .
+	\]
+	We have to calculate
+	\begin{align*}
+		\int \mleft| V_{<}(y) \int \frac{e^{-|x-y|}}{4\pi|x-y|} \phi(x) \d x \mright|^2 \d y &\leqslant \int \mleft|V_{<}(y) \mright|^2 \mleft| \int \frac{e^{-|x-y|}}{4\pi|x-y|} \phi(x) \d x \mright|^2  \d y \leqslant \\
+ & \leqslant 		\int \mleft|V_{<}(y) \mright|^2 \mleft| \mleft( \int \frac{e^{-2|x-y|}}{(4\pi)^2|x-y|^2} \d x \mright)^{\nicefrac{1}{2}}  \mleft( \int |\phi(x)|^2 \d x   \mright)^{\nicefrac{1}{2}} \mright|^2 \d y = \\
+ 	&=\int \mleft|V_{<}(y) \mright|^2 \mleft( \mleft( \int \frac{e^{-2|x|}}{(4\pi)^2|x|^2} \d x \mright)\mleft( \int |\phi(x)|^2 \d x   \mright) \mright)\d y = \\
+ 	&=\int \mleft|V_{<}(y) \mright|^2 \d y  \underbrace{\mleft( \int \frac{e^{-2|x|}}{(4\pi)^2|x|^2} \d x \mright)}_{=:c}\mleft( \int |\phi(x)|^2 \d x   \mright) = \\
+ 	&= c \|\phi\|^2 \int\limits_{|x| < R} \frac{Z^2}{|x|^2} \d x = c \|\phi\|^2 4\pi R Z^2,
+	\end{align*}
+	Since $R$ we can make $R$ arbitrarily small we have that
+	\[
+		\mleft\|V_{<} \mleft(-\Delta + 1\mright) \phi\mright\| \leqslant \epsilon\|\phi\| + 0\|\phi\|,	
+	\]
+	for $\epsilon^2 = 4\pi c RZ^2$.
+	
+	Thus we have for all $\psi \in \mathcal H$ 
+	\[
+		\mleft\| \frac{1}{|\cdot|}\psi\mright\| \leqslant a \|-\Delta \psi \| + b \|\psi\|,	
+	\]
+	holds for arbitrarily small but positive $a$ (while $b$ depends on $a$). One says that $B = \frac{Z}{|\cdot|}$ is infinitestessimally bounded.
+	
+	From Kato, Relich we get 
+	\[
+		\mathcal D(-\Delta - \frac{Z}{|x|}) = H^2 \mleft( \mathbb{R}^3 \mright)	
+	\]
+	
+	
+
+	
+\end{example*}
+
+
+\begin{theorem}[KLMN]
+	Suppose that $A, B$ are symmetric and that $\mathcal Q \mleft( B \mright) \supset \mathcal Q (A)$ and that there exist $a<1$ and $b \in \mathbb{R}$, such that 
+	\[
+			q_B[\psi] = \Braket{\psi, B \psi} \leqslant a \Braket{\psi, A \psi} + b \Braket{\psi,\psi},
+	\]
+	The form $\Braket{\psi, A \psi} + \Braket{\psi, B\psi}$ defines a self-adjoint operator (which is equivalent to the Friedrichs extension $A \dot+ B$ of $A+B$ and $\mathcal Q \mleft( A \dot + B \mright) = \mathcal Q(A)$).
+	
+\end{theorem}
+
+\begin{remark}
+	Thus information on the form domain is gained.
+\end{remark}
+
+\begin{example*}
+	Consider the operator
+	\[
+		D_{\text{FW}} : \begin{aligned}
+			H^1 \mleft( \mathbb{R}^3, \mathbb{C}^4 \mright) & \longrightarrow L^2 \mleft( \mathbb{R}^3, \mathbb{C}^4 \mright)\\
+			\psi & \longmapsto \begin{pmatrix}
+			e(\xi) &&&\\
+			&e(\xi) &&\\
+			&&-e(\xi) &\\
+			&&&-e(\xi)
+\end{pmatrix} \psi = \begin{pmatrix}
+				e(\xi) \psi_1(\xi)\\
+				e(\xi) \psi_2(\xi)\\
+				-e(\xi)\psi_3(\xi)\\
+				-e(\xi)\psi_4(\xi)
+			\end{pmatrix}
+		\end{aligned}	
+	\]
+	where 
+	\[
+		e(\xi) = \sqrt{c^2 \xi^2 + m^2 c^4}	.
+	\]
+	Further let $F_W(\xi)$ be the matrix such that 
+	\[
+		\hat D(\xi) = c \bm \alpha \cdot \xi + m c^2 \beta = F_W(\xi) D_{\text{FW}}(\xi) F_W(\xi)^*,	
+	\]
+	where 
+	\[
+		\bm \alpha = \begin{pmatrix}
+		0 & \bm \sigma\\
+		\bm \sigma & 0
+\end{pmatrix}, \quad \beta = \begin{pmatrix}
+1 & 0\\ 0 &-1
+\end{pmatrix}
+	\]
+	with $\bm \sigma$ denoting the three Pauli matrices
+	\[
+		\sigma_1 = \begin{pmatrix}
+			0&1\\1&0
+\end{pmatrix}	, \qquad \sigma_2 = \begin{pmatrix}
+			0&-i\\i&0
+\end{pmatrix}, \qquad \sigma_3 = \begin{pmatrix}
+			1&0\\0&-1
+\end{pmatrix}					
+	\]
+	The transformation $D(\xi) \rightarrow \hat D(\xi)$ is called the Foldy-Wouthuysen Transform.
+	
+	To find $F_W(\xi)$ first the matrices $\alpha_i$ are unitary, since $\sigma_i$ are. Let $\bm \gamma = (\alpha_1, \alpha_2, \alpha_3, \beta)$.
+
+	We can write $\hat D(\xi) = e(\xi) \cdot \sum_{j =1}^4 \omega_j \gamma_j$, where $|\omega| =1$. Note that $\sum_{j =1}^4 \omega_J \gamma_j$ has only eigenvalues $\pm 1$ each with multiplicity 2, since $\Tr \hat D(\xi) = \Tr D_{\text{FW}}(\xi) = 0$.
+	
+	Thus $\hat D(\xi)$ is a self-adjoint operator (real-valued multiplication operator) from $H^1 \mleft( \mathbb{R}^3, \mathbb{C}^4 \mright)$. The operator
+	\[
+		D_0 = \mathcal F \hat D \mathcal F^{-1},	
+	\]
+	is called the \bitext{free Dirac operator}, which is an extension of 
+	\[
+		\sum_{j = 1}^3 c \alpha_j \frac{1}{i} \partial_j + mc^2 \beta.
+	\]
+	
+	The spectrum of the free Dirac operator is $\sigma \mleft( D_0 \mright) = (-\infty, -mc^2]\cup [ mc^2,\infty)$.
+	
+	
+	The Dirac operator for the Hydrogen atom is given by 
+	\[
+		D_Z = D_0 - \frac{Z e^2}{|x|}.	
+	\]
+	We want to check that 
+	\[
+		\mleft\| \frac{Ze^2}{|x|} \psi \mright\| \leqslant a \|D_0 \psi \| + b\|\psi\|.	
+	\]
+	\begin{align*}
+		Z e^2 \sqrt{\int_{\mathbb{R}^3} \frac{1}{|x|^2} |\psi(x)|^2 } &\stackrel{?}{\leqslant} a \overbrace{\sqrt{\Braket{D_0 \psi, D_0 \psi}}}^{ = \sqrt{ \int \mleft| \hat D(\xi) \hat \psi (\xi) \mright|^2 \d \xi}} +  b \|\psi\| = a \sqrt{\int |e(\xi)|^2 \mleft| \hat\psi(\xi) \mright|^2 \d \xi} + b \|\psi\| = \\
+		&= a \sqrt{ \int \mleft( c^2 |\nabla \psi|^2 + m^2 c^4 |\psi|^2 \mright) \d x} + b \sqrt{\int|\psi|^2 \d x}.
+	\end{align*}
+	Hence this requires 
+	\[
+		\mleft(Ze^2 \mright)^2 \int \frac{|\psi(x)|^2}{|x|^2} \d x \leqslant a^2 c^2 \int |\nabla \psi|^2 \d x	
+	\]	
+	Using Hardy's inequality we get that 
+	\[
+		Z^2 \frac{e^4}{c^2} < \frac{1}{4} \implies Z \alpha_s < \frac{1}{2},	
+	\]	
+	where $\alpha_S = \frac{e^2}{\hbar c}$ is the Sommerfeld fine structure constant. This condition is also necessary for the inequality to be satisfied.
+	
+	This works for $Z < \frac{137.037}{2} \approx 69$ (Further extensions: see Nenciu for $Z\alpha < 1$).
+	
+\end{example*}
+
+
+\begin{example*}
+	Let $A = -\Delta$, with $\mathcal Q \mleft( A \mright) = H^1 \mleft( \mathbb{R}^3 \mright)$. Now consider the quadratic form 
+	\[
+		\Braket{\psi, B \psi} = \int \frac{\gamma}{|x|^2} |\psi(x)|^2 \d x,	
+	\]
+	for $\gamma \geqslant 0$.
+	
+	We get that 
+	\[
+		\gamma 	 \int \frac{1}{|x|^2} |\psi(x)|^2 \d x \leqslant a \int|\nabla \psi|^2 \d x + b \int |\psi|^2 \d x \iff \frac{\gamma}{\alpha}\leqslant \frac{1}{4},
+	\]
+	since we just need $a < 1$. In this case $-\Delta - \frac{\gamma}{|\cdot|}$ is defined by its quadratic form and its form domain is $H^1 \mleft( \mathbb{R}^3 \mright)$.
+\end{example*}
+
+\begin{remark*}
+	\begin{enumerate}
+		\item[1)] For $\gamma \geqslant \frac{1}{4}$ the inequality is not satisfied.
+		\item[2)] $\gamma = \frac{1}{4}$ ensures that $\int |\nabla \psi|^2 \d x - \gamma \int|\frac{\psi|^2}{|x|^2} \d x$ is still positive, so Friedrich's Theorem still gives us a self-adjoint operator.
+	\end{enumerate}
+\end{remark*}
+
+
+\section{Multi-Particle Operators}.
+
+Consider the Hamiltonian
+\[
+	H = \sum_{n = 1}^N \mleft( - \Delta_n - \phi \mleft( x_n \mright) \mright) + \sum_{1 \leqslant n < m \leqslant N} \frac{1}{\mleft| x_n - x_m \mright|} + \sum_{1 \leqslant k < j \leqslant K} \frac{Z_j Z_k}{\mleft| R_k - R_j \mright|},
+\]
+where 
+\[
+	\phi(x) = \sum_{k = 1}^K \frac{Z_k}{|x-R_k|}
+\]
+
+
+The wave function describing this system must be of the form $\psi \mleft( x_1, \dots, x_N \mright)$ antisymmetric and a spinor. Since the one particle Hilbert space is given by $\mathcal H = L^2 \mleft( \mathbb{R}^3 , \mathbb{C}^{2s + 1} \mright) $, where $s$ is the spin of the particle, the multiparticle state is in 
+\[
+	\mathcal H^{(N)}:= \bigwedge_{n=1}^N L^2 \mleft( \mathbb{R}^3, \mathbb{C}^{2s_n + 1} \mright),
+\]
+which in particular has $\prod_{i = 1}^N (2 s_n +1)$ components and is a function of $3N$ variables.
+
+Let $\psi \in \mathscr S \mleft( \mathbb{R}^{3N}, \mathbb{C}^{(2s +1)^N}\mright) $ (i.e. every particle has the same spin), i.e. the antisymmetric Schwartz space, which is dense in the Hilbert space. We get
+\begin{align*}
+	\Braket{\psi, H \psi} &= \sum_{n=1}^N \mleft( \int \mleft| \nabla_n \psi \mright|^2 \d x -  \int |\psi|^2 \sum_{k = 1}^N \frac{Z_k}{|x-R_k|} \d x + \int \sum_{1 \leqslant n < m \leqslant N} \frac{1}{|x_n-x_m|} |\psi|^2 \d x + R \|\psi\|^2 \mright)= \\
+	&\geqslant \sum_{n=1}^N \sum_{k =1}^K \underbrace{ \int \mleft( \frac{1}{K} |\nabla_n \psi|^2- \frac{Z_k}{|x_n - R_k|} |\psi|^2 \mright)}_{ \geqslant - d Z^2_k K \|\psi\|^2} \d x \geqslant - N K \sum_{j = 1}^K Z_j^2 \cdot \text{const},
+\end{align*}
+where we used the gound state energy of the Coulomb potential, i.e.
+\[
+	- \Delta - \frac{Z}{|\cdot|} \geqslant -\frac{1}{4} Z^2
+\]
+
+Thus Friedrich's Theorem gives a self-adjoint extension of the above.
 
 \end{document}
