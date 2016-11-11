@@ -1185,4 +1185,145 @@ where we used the gound state energy of the Coulomb potential, i.e.
 
 Thus Friedrich's Theorem gives a self-adjoint extension of the above.
 
+
+Recall \[
+	H_{N,\mathcal R,\mathcal Z} = \sum_{n = 1}^N \mleft( - \Delta_n - \phi \mleft( x_n \mright) \mright) + \sum_{1 \leqslant n < m \leqslant N} \frac{1}{\mleft| x_n - x_m \mright|} + \sum_{1 \leqslant k < j \leqslant K} \frac{Z_j Z_k}{\mleft| R_k - R_j \mright|},
+\]
+where $R_k$ are point-wise different such as in $\mathcal H^{(N)} = \bigwedge_{n=1}^N L^2 \mleft( \mathbb{R}^3, \mathbb{C}^q \mright)$.
+
+\subsection*{Thomas-Fermi-Theory}
+
+Consider 
+\[
+	\mathcal C:= \mleft\{ \rho \, \middle| \, \rho \text{ measurable, } \frac{1}{2} \int \int \frac{|\rho(x)\rho(y)|}{|x-y|} \d x \d y < \infty \mright\}.
+\]
+in particular we define the function on $\mathcal C$
+\[
+	D[\rho] =  \frac{1}{2} \int \int \frac{|\rho(x)\rho(y)|}{|x-y|} \d x \d y.
+\]
+
+
+$\mathcal C$ is a Hilbert space with scalar product
+\[
+	\Braket{\rho,\sigma} = \frac{1}{2} \int \int \frac{\overline{\rho(x)}\sigma(y)}{|x-y|} \d x \d y  
+\]
+since 
+\[
+	\int \int \frac{\overline{\rho(x)}\rho(y)}{|x-y|} \d x \d y = c \int \frac{\mleft| \hat\rho(\xi)\mright|^2}{|\xi|^2} \d \xi > 0, \quad \text{unless } \rho = 0 \;\text{a.e.},
+\]
+hence this defines a positive-definite sesquilinear form, i.e. a scalar product.
+
+Let
+\[
+	\mathcal D:= \mleft\{ \rho \geqslant 0 \, \big| \, \rho \in L^{\nicefrac{5}{3}} \mleft( \mathbb{R}^3 \mright) \cap \mathcal C \mright\}
+\]
+on which we define the Thomas-Fermi-Functional
+\[
+	\mathcal E_{\text{TF}}: \begin{aligned}
+		\mathcal D & \longrightarrow \mathbb{R}\\
+		\rho & \longmapsto \int\limits_{\mathbb{R}^3} \mleft( \frac{3}{5} \gamma_{\text{TF}}  \rho(x)^{\nicefrac{5}{3}} - \phi(x)\rho(x) \mright) \d x + D[\rho],
+	\end{aligned}
+\]
+where $\gamma_{\text{TF}}:= \mleft( \frac{6 \pi^2}{q} \mright)^{\nicefrac{3}{2}}$.
+
+It remains to show that $\int \phi(x)\rho(x) \in \mathbb{R}$. For this, since 
+$
+	\phi(x) = \sum_{k = 1}^N \frac{Z_k}{\mleft| x- R_k \mright|}
+$, it is enough to show that 
+\[
+	\int \frac{\rho(x)}{|x-R|} \d x < \infty
+\]
+for all $R$ and all $\rho \in \mathcal D$. For this it is, by change of variable, enough to show that 
+\[
+	\int\frac{\rho(x)}{|x|} \d x < \infty
+\]
+for all $\rho \in \mathcal D$.
+
+Since $\frac{1}{|x|} = W_1(x)+W_2(x)$, with
+\[
+	W_1(x) = \int\limits_{|y|\leqslant 1} \frac{1}{|x-y|} \frac{\d y}{\frac{4 \pi}{3}} = \int \frac{\sigma(y)}{|x-y|} \d y, \quad \sigma(y) = \frac{3}{4 \pi} \chi_{B_1(0)}(y)
+\]
+using Newton's Shell Theorem we get 
+\[
+	W_1(x) = \begin{cases}
+		?, \qquad & \text{if } |x|\leqslant 1\\
+		\frac{1}{|x|}, & \text{if } |x| \geqslant 1
+	\end{cases}
+\]
+in particular it follows that $W_2(x)$ has compact support in $B_1(0)$.
+
+	Again using Newton's shell theorem we get for $|x|\leqslant 1$ 
+	\[
+		W_1(x) = \int\limits_{0}^1 \frac{4\pi r'}{\max\{r',|x|\}} \frac{3}{4\pi}	\d r' \leqslant \frac{1}{|x|} \int\limits_0^1 3 r'^2 = \frac{1}{|x|}
+	\]
+	therefore we also get $W_2 \geqslant 0$.
+
+	Thus we get \[
+		\int\limits_{\mathbb{R}^3} W_2(x) \rho(x) \d x \leqslant \int\limits_{|x|\leqslant 1} \frac{\rho(x)}{|x|} \d x \stackrel{\text{H\"older}}{\leqslant} \mleft( \int\limits_{|x| \leqslant 1} \rho(x)^{\nicefrac{5}{3}} \mright)^{\nicefrac{3}{5}} \mleft( \int\limits_{|x| \leqslant 1} \frac{1}{|x|^{\nicefrac{5}{2}}}  \d x\mright)^{\nicefrac{2}{5}} < \infty	
+	\]
+	Further we also have 
+	\[
+		\frac{1}{2} \int\limits_{\mathbb{R}^3} \rho(x) W_1(x) \d x = \frac{1}{2} \int \rho(x) \int \frac{\sigma(y)}{|x-y|} \d y \d x \stackrel{\text{Schwarz}}{\leqslant} \underbrace{\sqrt{D[\rho]}}_{< \infty} \sqrt{D[\sigma]}
+	\]
+	Since 
+	\begin{align*}
+		\text{const} D[\sigma] &= \int\limits_{|x|<1} \int\limits_{|y|<1}	\frac{1}{|x-y|} \d y \d x= \int\limits_0^1 \int\limits_0^1 \frac{4 \pi r^2 4 \pi r'^2}{\max\{r,r'\}} = \text{const} \int\limits_0^1 \d r'^2  \int\limits_0^1 \frac{r^2}{\max\{r,r'\}}  \d r \d r' = \\
+		&= \text{const} \int\limits_0^1 r'^2 \mleft( \int\limits_0^{r'} \frac{r^2}{r'} + \int\limits_{r'}^1 \frac{r^2}{r} \d r \mright) \d r' = \text{const} \mleft( \int\limits_0^1 r' \frac{1}{3} r' \d r' + \int\limits_0^1 \frac{1}{2} (1-r'^2) \d r' \mright) < \infty
+	\end{align*}
+	hence $\mathcal E_{\text{TF}}$ is well-defined
+
+
+\begin{lemma}
+	The infimum of $\mathcal E_{\text{TF}} \mleft( \mathcal D \mright) >-  \infty$
+\end{lemma}
+
+\begin{proof}
+	\begin{align*}
+		\int \phi(x) \rho(x) \d x &= \sum_{k = 1}^N \int \mleft( Z_k W_1 \mleft( x- R_k \mright) + Z_k W_2 \mleft( x- R_k \mright) \mright) \rho(x) \d x \leqslant\\
+		&\leqslant \underbrace{\sum_{k = 1}^N Z_k}_{=: Z_{\text{tot}}} \mleft( \|\rho\|_{\nicefrac{5}{3}} \|W_2\|_{\nicefrac{5}{2}}+ \sqrt{D[\rho]} \sqrt{D[\sigma]} \mright),
+	\end{align*}
+	Hence we get 
+	\[
+		\mathcal E_{\text{TF}}[\rho] \geqslant \frac{3}{5} \gamma_{\text{TF}} \|\rho\|_{\nicefrac{5}{3}}^{\nicefrac{5}{3}} -  Z_{\text{tot}} \|\rho\|_{\nicefrac{5}{3}}	\|W_2\|_{\nicefrac{5}{2}} - Z_{\text{tot}} \sqrt{D[\rho]} \sqrt{D[\sigma]} + D[\rho] \geqslant-M > -\infty	
+	\]
+\end{proof}
+
+\begin{lemma}
+\label{MinEx}
+	There exists a unique $\rho_{\min}$ in $\mathcal D$ such that $\mathcal E_{\text{TF}} \mleft[ \rho_{\min} \mright] = \inf \mathcal E(\mathcal D)$.
+\end{lemma}
+
+\begin{lemma}[Banach-Alaoglu]
+	If $X$ is a reflexive Banach Space (i.e. $X'' = X$) and $\mleft( x_n \mright)_n \subset X$ is bounded then 
+	\[
+		\exists \mleft( x_{n_{\nu}} \mright)_{\nu} \subset \mleft( x_n \mright)_n: \exists x \in X :\forall l \in X' : l \mleft( x_{n_{\nu}} \mright) \xrightarrow{\nu \rightarrow \infty} l(x)
+	\]
+	
+One says that $x_{n_{\nu}}\rightharpoonup x$ converges weakly.
+\end{lemma}
+
+\begin{remark}
+	\begin{enumerate}
+		\item[1)] For $p \in (1,\infty)$, $L^{p'} = L^q$, thus $L^{p''} = L^p$, hence for every $\phi \in \L^p$ and $\psi \in L^q$ we must have 
+		\[
+			\ell_\phi \mleft( \psi \mright)= \int\phi(x) \psi(x) \d x		
+		\]
+		\item[2)] For a Hilbert space $\mathcal H' = \mathcal H$.
+	\end{enumerate}
+\end{remark}
+
+\begin{proof}[Proof of \autoref{MinEx}]
+	$\mathcal E_{\text{TF}}$ is coercive in the $\|\cdot\|_{\nicefrac{5}{3}}$
+-norm and in the $\|\cdot\|_C:= \sqrt{D[\cdot]}$-norm, i.e.
+\[
+	\mathcal E_{\text{TF}} [p_n] \nearrow \infty \text{ if } \|p_n \|_{\nicefrac{5}{2}} \rightarrow \infty \text{ or if } \|p_n\|_c \rightarrow \infty 
+\]
+
+	This is immediate from our lower bound, 
+	\[
+		\mathcal E_{\text{TF}} (\rho) \geqslant \frac{3}{5} \gamma_{\text{TF}} \|\rho\|_{\nicefrac{5}{3}}^{\nicefrac{5}{3}} - \text{const} \|\rho\|_{\nicefrac{5}{3}} - \text{const} \|\rho\|_{C} + \|\rho\|^2_C,
+	\]
+	Thus any minimizing sequence $\rho_n$, i.e. $\lim \mathcal E_{\text{TF}} \mleft( \rho_n \mright) = \inf \mathcal E_{\text{TF}} \mleft( \mathcal D \mright)$ must be bounded in $\|\cdot\|_{\nicefrac{5}{3}}$-norm and $\|\cdot\|_C$-norm.
+
+
 \end{document}
