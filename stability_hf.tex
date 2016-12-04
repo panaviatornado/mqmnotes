@@ -1,0 +1,394 @@
+\documentclass[11pt]{amsart}
+%\usepackage[pdftex]{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usepackage[shortlabels]{enumitem} % [shortlabels] supports changing enumerate labels easily
+\usepackage{mathrsfs} % get script L
+%\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage[margin=1in]{geometry}
+%\usepackage{fancyhdr,lastpage}
+%\usepackage{float} % force figures to be placed where they are
+%\usepackage{caption,subcaption} % subfigures
+%\usepackage{tikz}
+\usepackage{mathtools} % get underbracket
+\usepackage{showkeys} % keep track of labels while writing, [notcite] for not showing citations. comment out when done.
+\usepackage{hyperref}  % KEEP THIS PACKAGE LAST
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MATH SHORTCUTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\comments}[1]{}
+\newcommand{\vocab}[1]{\emph{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\mapsfrom}{\rotatebox[origin=c]{180}{$\mapsto$}\;}
+\newcommand{\longequal}[1]{\overset{#1}{=\joinrel=}}
+\newcommand{\qedsquare}{\mbox{}\hfill $\square$}
+\renewcommand{\Im}{\operatorname{\mathfrak{Im}}}
+\renewcommand{\Re}{\operatorname{\mathfrak{Re}}}
+\newcommand{\T}{\mathbb{T}}
+%\newcommand{\D}{\mathbb{D}}
+\DeclareRobustCommand{\Chi}{{\mathpalette\irchi\relax}}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}} % inner command, used by \rchi
+%http://tex.stackexchange.com/questions/103885/how-to-type-an-inline-chi-in-latex
+\newcommand{\hol}{\mathfrak{A}}
+\newcommand{\ac}{\mathrm{ac}}
+\newcommand{\sing}{\mathrm{sing}}
+\newcommand{\spr}{\operatorname{spr}}
+\newcommand{\pt}{\mathrm{pt}}
+\newcommand{\res}{\mathrm{res}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\renewcommand{\tilde}{\widetilde}
+\newcommand{\weaks}{\stackrel{*}{\rightharpoonup}}
+
+\renewcommand{\tilde}{\widetilde}
+\renewcommand{\hat}{\widehat}
+
+\newif\ifshowall
+\showalltrue % set to True to show all; set to False to hide extra things
+% use \showalltrue or \showallfalse
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (AMSART) THEOREM NUMBERING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{conj}{Conjecture}
+%\newtheorem{conj}{Conjecture}[section]
+%\newtheorem{obs}{Observation}[section]
+
+\theoremstyle{definition}
+\newtheorem*{ex}{Example}
+\newtheorem*{exs}{Examples}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+
+\theoremstyle{definition}
+\newtheorem*{rmk}{Remark}
+\newtheorem*{rmks}{Remarks}
+
+\numberwithin{equation}{section}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+%use with eg. align*
+%http://tex.stackexchange.com/questions/42726/align-but-show-one-equation-number-at-the-end
+
+
+% MORE FORMATTING
+%\parindent 0in
+%\parskip 1cm
+
+\setlist{nolistsep}
+%\setlist{itemsep=0.1cm}
+
+\newcommand{\lec}[1]{\noindent\bfseries{\scshape{#1}}}
+\def\labelitemi{$\ast$} % bullet point type
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title[]{Stability of Matter (MQM WS2016-17)}
+\date{\today}
+
+\maketitle
+
+\section{Lieb-Thirring and Lieb-Oxford inequalities}
+
+\begin{thm}[Lieb-Thirring]
+Let $\psi\in\bigwedge_{n=1}^NH^1(\R^3)$ (antisymmetric, but we drop spin because it will not change the argument but will make notation heavier). Then
+\begin{equation}\label{eqn:lt}
+T[\psi]:=\sum_{\nu=1}^N\int_{\R^3}|\nabla_\nu \psi|^2\ge L\int\rho_\psi(x)^{5/3}\,dx,
+\end{equation}
+where
+\[
+\rho_\psi(x):=N\int_{\R^{3(N-1)}}|\psi(x,x_2,\ldots,x_N)|^2\,dx_2\cdots\,dx_N.
+\]
+The constant $L$ is independent of $\psi$, and the optimal value is conjectured (Lieb-Thirring conjecture, hard!) to be $L=\frac{3}{5}\gamma_{TF}=\frac{3}{5}(6\pi^2)^{2/3}$.
+\end{thm}
+This inequality is proved in homework sheet 7.
+
+\begin{thm}[Lieb-Oxford]
+Let $\psi\in H^1(\R^{3N})$. Then
+\begin{equation}\label{eqn:lieb-oxford}
+\int_{\R^{3N}}\sum_{1\le n<m\le N}\frac{|\psi(x)|^2}{|x_n-x_m|}\,dx\ge D[\rho_\psi]-1.68\int\rho_\psi^{4/3}.
+\end{equation}
+\end{thm}
+
+
+\begin{thm}
+Let 
+\begin{equation}\label{eqn:hamiltonian}
+H_{\mathcal{Z},\mathcal{R}}:=\sum_{n=1}^N\left(\vphantom{\sum_{k=1}^k\frac{Z_k}{|x_n-R_k|}}\right.\!\!-\Delta_n-\underbrace{\sum_{k=1}^K\frac{Z_k}{|x_n-R_k|}}_{=:V(x_n)}\left.\vphantom{\sum_{k=1}^N}\right)+\sum_{1\le n<m\le N}\frac{1}{|x_n-x_m|}+\underbrace{\sum_{1\le k<\ell\le K}\frac{Z_kZ_\ell}{|R_k-R_\ell|}}_{\mathfrak{A}},
+\end{equation}
+which is self adjoint in $\bigwedge_{n=1}^NL^2(\R^3)$. Then there exists $C$ (depending on $N+K$ and the maximum $Z_n$) such that for all $R_1,\ldots,R_K\in\R^3$ pairwise different,
+\begin{equation}
+\inf \sigma(H_{\mathcal{Z},\mathcal{R}})\ge -C(N+K),
+\end{equation}
+i.e.
+\[
+\inf\left\{(\psi,H_{\mathcal{Z},\mathcal{R}}\psi):\psi\in\bigwedge_{n=1}^NC_0^\infty(\R^3),\|\psi\|=1\right\}\ge-C(N+K).
+\]
+\end{thm}
+
+\begin{proof}
+First note that by Keller,
+\begin{align*}
+E_{TF}(\mathcal{Z})&\ge E_{TF}(Z_1)+\cdots+E(Z_K)=(Z_1^{7/3}+\cdots+Z_K^{7/3})E_{TF}(1)\\
+&\ge\max\{Z_1,\ldots,Z_K\}^{7/3}E_{TF}(1)K.
+\end{align*}
+Now apply Lieb-Thirring and Lieb-Oxford:
+\begin{align*}
+(\psi,H_{\mathcal{Z},\mathcal{R}}\psi)&\ge \int(\underbrace{(1-\varepsilon)L}_{:=\frac{5}{3}\gamma_{TF}}\rho_\psi^{5/3}-V(x)\rho_\psi(x))\,dx+D[\rho_\psi]+\underbrace{\mathfrak{A}}_{\text{repulsive}}+\varepsilon L\int \rho_\psi^{5/3}-1.68\int\underbrace{\rho_\psi(x)^{4/3}}_{=\rho_\psi^{5/6}\rho_\psi^{1/2}}\,dx\\
+&\ge -\max\{Z_1,\ldots,Z_K\}^{7/3}E_{TF}(1)K+\varepsilon L\int \rho_\psi^{5/3}-2\cdot\frac{1.68}{2}\sqrt{\delta}\left(\int \rho_\psi^{5/3}\right)^{1/2}\left(\int\rho_\psi^{5/3}\right)^{1/2}\sqrt{\delta}\\
+&\ge -CK+\varepsilon L\int\rho_\psi^{5/3}-\frac{1.68}{2}\delta \int\rho_\psi^{5/3}-\frac{1.68}{2}\frac{1}{\delta}N\\
+&\ge -C(K+N),
+\end{align*}
+where we used $2ab\le a^2+b^2$ in the 2nd to last inequality, and chose $\delta$ so that $\varepsilon L=\frac{1.68}{2}\delta$ to obtain the last inequality.
+\end{proof}
+
+
+\begin{rmk}
+Goal: We want to show the actual quantum energy for saturated atoms $N=Z$ satisfies
+\begin{equation}
+E_Q(Z,Z)=E_{TF}(Z)+o(Z^{7/3}),\quad Z\to\infty,
+\end{equation}
+so Thomas-Fermi gives the correct energies asymptotically.
+\end{rmk}
+
+\section{Reduced density matrix functionals}
+
+We are considering states $\psi\in\bigwedge_{n=1}^N(L^2(\R^3)\otimes\C^q)$ antisymmetric with spin, with norm 1.
+ For notation, we let $x=(\mathfrak{x},\sigma)\in\R^3\times\{1,\ldots,q\}=:\Gamma$ and write $\int dx=\sum_{\sigma=1}^q\int d\mathfrak{x}$. %an element in L^2\otimes C^q looks like f_1 \otimes (1,0,...0) + f_2\otimes (0,1,0,...,0) + ... + f_q\otimes(0,...,0,1). 
+% then \int f \,dx = \sum \int f_j \,dx
+\begin{defn}
+The \vocab{one-particle reduced density matrix of $\psi$} is 
+\begin{align*}
+\gamma_\psi:L^2(\Gamma)&\longrightarrow L^2(\Gamma)\\
+f&\longmapsto \int_\Gamma \psi_\gamma(x,x')f(x')\,dx'
+\end{align*}
+\end{defn}
+\begin{claim}
+$\gamma_\psi\ge0$.
+\end{claim}
+\begin{proof}
+\begin{align*}
+(f,\gamma_\psi f)&=\int dx\,\int dx'\,\overline{f(x)}\gamma(x,x')f(x')\\
+&=\int dx\,\int dx'\,\int dx_2\cdots dx_N\,\overline{f(x)}\psi(x,x_2,\ldots,x_N)\overline{\psi(x',x_2,\ldots,x_N)}f(x')\\
+&=\int dx_2\cdots dx_N\,\left|\int dx\,\overline{f(x)}\psi(x,x_2,\ldots,x_N)\right|^2\ge0.
+\end{align*}
+\end{proof}
+
+\begin{fact}
+For fermions, $\gamma_\psi\le1$.
+\end{fact}
+
+\begin{fact}
+$\operatorname{tr}\gamma_\psi=N$, so $\gamma\in\mathfrak{S}^1(\Gamma)$.
+\end{fact}
+
+
+\begin{defn}
+Any $\gamma\in\mathfrak{S}^1(\Gamma)$ with $0\le\gamma\le1$ is called a \emph{reduced one-particle density matrix} and $N:=\operatorname{tr}\gamma$ is called its \vocab{particle number}.
+\end{defn}
+
+\begin{rmk}
+If $\gamma$ is a one-particle density matrix with $\operatorname{tr}\gamma\in\N_0$, then there exists $\psi\in\bigwedge_{n=1}^NL^2(\Gamma)$, $\|\psi\|=1$, such that $\gamma=\gamma_\psi$.
+\end{rmk}
+
+\subsection{Slater determinant}
+
+Given $e_1,\ldots, e_N\in L^2(\Gamma)$ (called orbitals by chemists) pairwise orthogonal, the simplest antisymmetric wavefunction we can form is given by a \vocab{Slater determinant},
+\begin{equation}
+\frac{1}{\sqrt{N!}}e_1\wedge\cdots\wedge e_N(x_1,\ldots,x_N)=\frac{1}{\sqrt{N!}}\begin{vmatrix}
+e_1(x_1)&\cdots &e_1(x_N)\\
+\vdots&\ddots&\vdots\\
+e_N(x_1)&\cdots&e_N(x_N)
+\end{vmatrix}.
+\end{equation}
+The associated one-particle reduced density matrix and its integral kernel are
+\begin{align}
+\gamma_{\psi_{e_1,\ldots,e_N}}&=|e_1\rangle\langle e_1|+\cdots+|e_N\rangle\langle e_N|\\
+\gamma_{\psi_{e_1,\ldots,e_N}}(x,x')&=e_1(x)\overline{e_1(x')}+\cdots+e_N(x)\overline{e_N(x')}
+\end{align}
+Thus the one-particle reduced density matrix of a Slater determinant is a projection onto the space spanned by its orbitals.
+
+\subsection{Hartree-Fock functional}
+
+This is also called mean-field theory. We assume our wavefunction is as simple as possible, given by a Slater determinant as above, and plug it into the Hamiltonian \eqref{eqn:hamiltonian}.
+\begin{defn}
+The \vocab{Hartree-Fock functional} is
+\begin{align*}
+E_{HF}^C(e_1,\ldots,e_N):=&(\psi_{e_1,\ldots,e_N},H_{\mathcal{Z},\mathcal{R}}\psi_{e_1,\ldots,e_N})\\
+=&\sum_{n=1}^N(e_n,(-\Delta-V)e_n)+\frac{1}{2}\int_\Gamma dx\,\int_\Gamma dy\,\left[\frac{(|e_1(x)|^2+\cdots|e_N(x)|^2)(|e_1(y)|^2+\cdots+|e_N(y)|^2)}{|\mathfrak{x}-\mathfrak{y}|}-\right.\\
+&\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.-\frac{|e_1(x)\overline{e_1(y)}+\cdots+e_N(x)\overline{e_N(y)}}{|\mathfrak{x}-\mathfrak{y}|}\right] +\underbrace{\mathfrak{A}}_{\text{repulsion}}
+\end{align*}
+\end{defn}
+The Hartree-Fock functional (omitting the repulsive term) can also be written
+\begin{multline}
+E_{HF}^C(e_1,\ldots,e_N)=\operatorname{tr}((-\Delta-V)\gamma_{\psi_{e_1,\ldots,e_N}})+\underbrace{\frac{1}{2}\int_\Gamma dx\,\int_\Gamma dy\,\frac{\gamma_{\psi_{e_1,\ldots,e_N}}(x,x)\gamma_{\psi_{e_1,\ldots,e_N}}(y,y)}{|\mathfrak{x}-\mathfrak{y}|}}_{=:D[\rho_\psi]}-\\
+-\underbrace{\frac{1}{2}\int_\Gamma dx\,\int_\Gamma dy\,\frac{|\gamma_{\psi_{e_1,\ldots,e_N}}(x,y)|^2}{|\mathfrak{x}-\mathfrak{y}|}}_{=:X[\gamma_{\psi_{e_1,\ldots,e_N}}]\text{ exchange term}}
+\end{multline}
+(Recall
+\begin{align*}
+\operatorname{tr}A\gamma&=\sum_{k=1}^\infty (e_k,A\sum_N|e_n\rangle\langle e_N|e_k)\\
+&=\sum_{k=1}^\infty(e_k,\sum_{n=1}^NAe_n)(e_n,e_k)=\sum_n^N(e_n,Ae_n).
+\end{align*}
+
+\subsection{Hartree-Fock for trace class operators}
+Define 
+\[
+S:=\{\gamma\in\mathfrak{S}^1(L^2(\R^3:C^q)):\langle p\rangle \gamma\langle p\rangle \in\mathfrak{S}^1,0\le\gamma\le1\},
+\]
+where $\langle p\rangle=\sqrt{p^2+1}$ the Japanese bracket. This condition essentially says that we have finite kinetic energy and particle number, since we require
+\[
+\operatorname{tr}\sqrt{p^2+1}\gamma\sqrt{p^2+1}=\operatorname{tr}p^2\gamma+\operatorname{tr}\gamma<\infty.
+\]
+For any $\gamma\in\mathfrak{S}^1$ with $\gamma\ge0$ (which implies self-adjoint), we can write (spectral theorem for compact operators and integral kernel\footnote{The Schatten $p$-classes are increasing so $\mathfrak{S}^1\subset\mathfrak{S}^2$.}) %http://mathoverflow.net/questions/232111/every-self-adjoint-trace-class-operator-on-l2-has-integral-kernel
+\begin{align}
+\gamma&=\sum_{\nu=1}^\infty\lambda_\nu|\xi_\nu\rangle\langle\xi_\nu|,\quad \xi_j\text{ ON}\\
+\gamma(x,y)&=\sum_{\nu=1}^\infty\lambda_\nu\xi_\nu(x)\overline{\xi_\nu(y)}.
+\end{align}
+\begin{defn}
+For any $\gamma\in S$,%\mathfrak{S}^1(\Gamma)$ with $-\Delta\gamma\in\mathfrak{S}^1$,
+the \vocab{Hartree-Fock functional} is
+\begin{align}
+\mathcal{E}_{HF}(\gamma):=&\operatorname{tr}((-\Delta-V)\gamma)+D[\rho_\gamma]-X[\gamma],\\
+\text{where }\quad\rho_\gamma(\mathfrak{x}):=&\sum_{\sigma=1}^q\sum_\nu\lambda_\nu|\xi_\nu(\mathfrak{x},\sigma)|^2\,``=''\,\sum_{\sigma=1}^{q}\gamma(x,x).
+\end{align}
+\end{defn}
+Here 
+\begin{align*}
+D[\rho_\gamma]:=&\frac{1}{2}\int d\mathfrak{x}\, d\mathfrak{y}\,\frac{\rho_\gamma(\mathfrak{x})\rho_\gamma(\mathfrak{y})}{|\mathfrak{x}-\mathfrak{y}|}\\
+X[\gamma]:=&\frac{1}{2}\int_\Gamma dx\,\int dy\,\frac{|\gamma(x,y)|^2}{|\mathfrak{x}-\mathfrak{y}|}
+\end{align*}
+
+Define
+\begin{align*}
+S_N:=&\{\gamma\in S:\operatorname{tr}\gamma\le N\}\\
+S_{\partial N}:=&\{\gamma\in S:\operatorname{tr}\gamma=N\}
+\end{align*}
+
+%Question: Is $\mathcal{E}_{HF}$ bounded from below?
+
+
+
+%Then we can view the Hartree-Fock functional on $S$ as
+%\begin{align*}
+%\mathcal{E}_{HF}:S&\to \R\\
+%\gamma&\mapsto \operatorname{tr}[(-\Delta-V)\gamma]+\underbrace{D[\rho_\gamma]-X[\gamma]}_{=:Q(\gamma,\gamma)}
+%\end{align*}
+%Write $\gamma=\sum\lambda_\nu|e_\nu\rangle\langle e_\nu|$, $\lambda_\nu\in[0,1]$.
+%\begin{itemize}
+%\item 
+%\begin{align*}
+%\operatorname{tr}((-\Delta-V)\gamma)=&\sum_{\nu=1}^{\infty}\lambda_\nu\left(\int dx\,|\nabla e_\nu|^2-\int V(\mathfrak{x})|e_\nu(x)|^2\,dx\right)\\
+%\ge&-N\inf \sigma(-\Delta-V).%?????
+%\end{align*}
+
+%\item $D[\rho_\gamma]-X[\gamma]\ge0$ (next time)
+%\end{itemize}
+
+
+
+\begin{prop}
+$\mathcal{E}_{HF}(S_N)\ge -cN$.
+\end{prop}
+\begin{proof}
+Recall $V(\mathfrak{x})=\sum_{k=1}^K\frac{Z_k}{|\mathfrak{x}-R_k|}$, and compute
+\begin{align*}
+\operatorname{tr}((-\Delta-V)\gamma)&=\operatorname{tr}[(-\Delta-V)\sum_\nu\lambda_\nu|\xi_\nu\rangle\langle\xi_\nu|]=\sum_{\mu}\langle \xi_\mu,(-\Delta-V)(\sum_\nu\lambda_\nu|\xi_\nu\rangle\langle\xi_\nu),\xi_\mu\rangle\\
+%&=\sum_\mu\langle \xi_\mu,(-\Delta-V)\lambda_\mu\xi_\mu\rangle
+&=\sum_\nu\lambda_\nu(\xi_\nu,(-\Delta-V)\xi_\nu)\ge-\sum_\nu \lambda_\nu|E_0|\ge -N|E_0|,
+\end{align*}
+where $E_0:=\inf\sigma(-\Delta-V)>-\infty$ (Kato-Rellich? $-\Delta-V\ge-K$?).
+The remaining term to bound is $Q(\gamma,\gamma)=D[\rho_\gamma]-X[\gamma]$, which we can bound via
+\begin{align*}
+&\frac{1}{2}\int_\Gamma dx\,\int_\Gamma dy\,\frac{\sum_\nu\lambda_\nu|\xi_\nu(x)|^2\sum_{\mu}\lambda_\mu|\xi_\mu(y)|^2-\left|\sum_\nu\lambda_\nu\xi_\nu(x)\overline{\xi_\nu(y)}\right|^2}{|\mathfrak{x}-\mathfrak{y}|}\\
+&\ge\frac{1}{2}\int_\Gamma dx\,\int_\Gamma dy\,\frac{1}{|\mathfrak{x}-\mathfrak{y}|}\left(\sum_\nu\lambda_\nu|\xi_\nu(x)|^2\sum_\mu\lambda_\mu|\xi_\mu(x)|^2-\left(\sqrt{\sum_\nu\lambda_\nu|\xi_\nu(x)|^2}\sqrt{\sum_\mu\lambda_\mu|\xi_\mu(y)|^2}\right)^2\,\right)\\
+&=0.
+\end{align*}
+Thus $\mathcal{E}_{HF}(S_N)\ge-cN$.
+\end{proof}
+
+\begin{lem}[Lieb, Bach]
+Let $\gamma\in S_N$, $\gamma=\sum \lambda_\nu|\xi_\nu\rangle\langle\xi_\nu|$ with $\lambda_1,\lambda_2\in (0,1)$. Then there exists $\gamma'\in S_N$ such that
+\begin{itemize}
+\item $\operatorname{tr}\gamma=\operatorname{tr}\gamma'$
+\item $\mathcal{E}_{HF}(\gamma')<\mathcal{E}_{HF}(\gamma)$
+\item $\gamma=\gamma'$ on the space $\{\xi_1,\xi_2\}^\perp$, and on the space generated by $\{\xi_1,\xi_2\}$,
+\begin{align*}
+\gamma'=&\delta |\xi_1\rangle+\lambda_2'|\xi_2\rangle\langle\xi_2|\\
+\text{\textsc{or} }\qquad\gamma'=&\lambda_1'\xi_1\rangle\langle\xi_1|+\delta|\xi_2\rangle\langle\xi_2|,
+\end{align*}
+where $\delta\in\{0,1\}$.
+\end{itemize}
+\end{lem}
+So we have one less eigenvalue in $(0,1)$ than before.
+\begin{proof}
+For some $\varepsilon\in\R$, write 
+\begin{align*}
+\gamma'&=\gamma+\varepsilon|\xi_1\rangle\langle\xi_1|-\varepsilon|\xi_2\rangle\langle\xi_2|\\
+&=:\gamma+\varepsilon P.
+\end{align*}
+Then $\operatorname{tr}\gamma=\operatorname{tr}\gamma'$ and $\gamma'\in S_N$ if $\varepsilon$ is close enough to 0. (We need $0\le \lambda_1+\varepsilon\le1$ and $0\le \lambda_2-\varepsilon\le1$.) Then
+\begin{align}
+\nonumber\mathcal{E}_{HF}(\gamma')-\mathcal{E}_{HF}(\gamma)&=\operatorname{tr}[(-\Delta-V)(\gamma'-\gamma)]+Q(\gamma+\varepsilon P,\gamma+\varepsilon P)-Q(\gamma,\gamma)\\
+&=\varepsilon\operatorname{tr}[(-\Delta-V)P]+\varepsilon(Q(\gamma,P)+Q(p,\gamma))+\varepsilon^2Q(P,P)\label{eqn:lieb-bach-proof}
+\end{align}
+Now we show $Q(P,P)<0$, so that $\varepsilon^2 Q(P,P)<0$. Then by choosing $\varepsilon$ appropriately, we can force the above expression \eqref{eqn:lieb-bach-proof} $\varepsilon[\cdots]+\varepsilon^2Q(P,P)$ negative. 
+\begin{align*}
+Q(P,P)&=\frac{1}{2}\int dx\,dy\,\frac{1}{|\mathfrak{x}-\mathfrak{y}|}\left((|\xi_1(x)|^2-|\xi_2(x)|^2)(|\xi_1(y)|^2-|\xi_2(y)|^2)-|\xi_1(x)\overline{\xi_1(y)}-\xi_2(x)\overline{\xi_2(y)}|^2\right)\\
+&=\frac{1}{2}\int dx\,dy\,\frac{1}{|\mathfrak{x}-\mathfrak{y}|}\left(|\xi_1(x)|^2|\xi_1(y)|^2+|xi_2(x)|^2|\xi_2(y)|^2-2|\xi_1(x)|^2|\xi_2(y)|^2-\right.\\
+&\qquad\qquad\qquad\qquad\qquad\left.-|\xi_1(x)|^2|\xi_1(y)|^2-|\xi_2(x)|^2|\xi_2(y)|^2+2\Re \xi(x)\overline{\xi_2(x)}\overline{\xi_1(y)}\xi_2(y)\right)\\
+&\stackrel{\text{Schwarz}}{\le}0,
+\end{align*}
+using Cauchy-Schwarz to obtain
+\begin{align*}
+&\int dx\,dy\,\frac{1}{|\mathfrak{x}-\mathfrak{y}|}\cdot 2\Re\underbracket{\xi_1(x)\underbracket{\overline{\xi_2(x)}\overline{\xi_1(y)}}\xi_2(y)}\\
+&\quad\le 2\sqrt{\int dx\,dy\,\frac{1}{|\mathfrak{x}-\mathfrak{y}|}|\xi_1(x)|^2|\xi_2(y)|^2}\sqrt{\int dx\,dy\,\frac{1}{|\mathfrak{x}-\mathfrak{y}|}|\xi_2(x)|^2|\xi_1(y)|^2}\\
+&=2\int dx\,\int dy\,\frac{1}{|\mathfrak{x}-\mathfrak{y}|}|\xi_1(x)|^2|\xi_2(y)|^2.
+\end{align*}
+Moreover, equality in $Q(P,P)\ge0$ is not possible, since one would require $\xi(x)\xi_2(y)=c\overline{\xi_2(x)}\overline{\xi_1(y)}$, which is not possible since $\xi_1,\xi_2$ are orthogonal. So we obtain $Q(P,P)>0$. %TODO later prove/check equality not possible
+
+Going back to $\varepsilon[\cdots]+\varepsilon^2Q(P,P)$:
+\begin{itemize}
+\item If $[\cdots]<0$ choose $\varepsilon>0$
+\item If $[\cdots]>0$ choose $\varepsilon<0$
+\item If $[\cdots]=0$ choose $\varepsilon\ne0$
+\end{itemize}
+This ensures \eqref{eqn:lieb-bach-proof} $\varepsilon[\cdots]+\varepsilon^2Q(P,P)<0$. In fact, we can increase or decrease $\varepsilon$ until $\lambda_1+\varepsilon$ reaches 0 or 1, or until $\lambda_2-\varepsilon$ reaches 0 or 1.
+\end{proof}
+
+\begin{cor}
+Assume $\gamma$ minimizes $\mathcal{E}_{HF}(S_{\partial N})$, $N$ an integer. Then $\gamma=\gamma^2$ a projection.
+\end{cor}
+\begin{proof}
+Suppose $\gamma=\sum \lambda_\nu|\xi_\nu\rangle\langle\xi_\nu|$, and there is $0<\lambda_\nu<1$. Then there exists a second $\mu\ne\nu$ such that $0<\lambda_\mu<1$. Then $\gamma'$ as constructed before yields $\mathcal{E}_{HF}(\gamma')<\mathcal{E}_{HF}(\gamma)$.
+\end{proof}
+
+
+
+
+\end{document}

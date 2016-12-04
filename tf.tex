@@ -1,0 +1,609 @@
+\documentclass[11pt]{amsart}
+%\usepackage[pdftex]{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usepackage[shortlabels]{enumitem} % [shortlabels] supports changing enumerate labels easily
+\usepackage{mathrsfs} % get script L
+%\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage[margin=1in]{geometry}
+%\usepackage{fancyhdr,lastpage}
+%\usepackage{float} % force figures to be placed where they are
+%\usepackage{caption,subcaption} % subfigures
+%\usepackage{tikz}
+\usepackage{showkeys} % keep track of labels while writing, [notcite] for not showing citations. comment out when done.
+\usepackage{hyperref}  % KEEP THIS PACKAGE LAST
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MATH SHORTCUTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\comments}[1]{}
+\newcommand{\vocab}[1]{\emph{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\mapsfrom}{\rotatebox[origin=c]{180}{$\mapsto$}\;}
+\newcommand{\longequal}[1]{\overset{#1}{=\joinrel=}}
+\newcommand{\qedsquare}{\mbox{}\hfill $\square$}
+\renewcommand{\Im}{\operatorname{\mathfrak{Im}}}
+\renewcommand{\Re}{\operatorname{\mathfrak{Re}}}
+\newcommand{\T}{\mathbb{T}}
+%\newcommand{\D}{\mathbb{D}}
+\DeclareRobustCommand{\Chi}{{\mathpalette\irchi\relax}}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}} % inner command, used by \rchi
+%http://tex.stackexchange.com/questions/103885/how-to-type-an-inline-chi-in-latex
+\newcommand{\hol}{\mathfrak{A}}
+\newcommand{\ac}{\mathrm{ac}}
+\newcommand{\sing}{\mathrm{sing}}
+\newcommand{\spr}{\operatorname{spr}}
+\newcommand{\pt}{\mathrm{pt}}
+\newcommand{\res}{\mathrm{res}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\renewcommand{\tilde}{\widetilde}
+\newcommand{\weaks}{\stackrel{*}{\rightharpoonup}}
+
+\renewcommand{\tilde}{\widetilde}
+\renewcommand{\hat}{\widehat}
+
+\newif\ifshowall
+\showalltrue % set to True to show all; set to False to hide extra things
+% use \showalltrue or \showallfalse
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (AMSART) THEOREM NUMBERING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{conj}{Conjecture}
+%\newtheorem{conj}{Conjecture}[section]
+%\newtheorem{obs}{Observation}[section]
+
+\theoremstyle{definition}
+\newtheorem*{ex}{Example}
+\newtheorem*{exs}{Examples}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+
+\theoremstyle{definition}
+\newtheorem*{rmk}{Remark}
+\newtheorem*{rmks}{Remarks}
+
+\numberwithin{equation}{section}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+%use with eg. align*
+%http://tex.stackexchange.com/questions/42726/align-but-show-one-equation-number-at-the-end
+
+
+% MORE FORMATTING
+%\parindent 0in
+%\parskip 1cm
+
+\setlist{nolistsep}
+%\setlist{itemsep=0.1cm}
+
+\newcommand{\lec}[1]{\noindent\bfseries{\scshape{#1}}}
+\def\labelitemi{$\ast$} % bullet point type
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title[]{Thomas-Fermi Theory (MQM WS2016-17)}
+\date{\today}
+
+\maketitle
+
+\section{The Thomas-Fermi Functional}
+Let 
+\[
+C:=\{\rho:\rho\text{ measurable};\,D[\rho]:=\frac{1}{2}\int_{\R^3\times\R^3}dx\,dy\,\frac{|\rho(x)\rho(y)|}{|x-y|}<\infty\}.
+\] 
+(This is really a set of equivalence classes like $L^p$.) Then $C$ is a Hilbert space with scalar product
+\begin{equation}
+(\rho,\sigma)_C=\frac{1}{2}\int dx\int dy\,\frac{\overline{\rho(x)}\sigma(y)}{|x-y|},
+\end{equation}
+Heuristically,
+\[
+\int dx\int dy\,\frac{\overline{\rho(x)}\rho(y)}{|x-y|}=c\int d\xi\,\frac{|\hat{\rho}(\xi)|^2}{|\xi|^2}\ge0,
+\]
+with equality iff $\hat{\rho}=0$ a.e. i.e. $\rho=0$ a.e. So sesquilinear is obvious and positivity follows heuristically by the Fourier transform. (For an actual proof, see Theorem~9.8 in \cite{lieb-loss}.
+
+\begin{defn}
+Set
+\begin{equation}
+\mathcal{D}:=\{\rho\ge0:\rho\in L^{5/3}(\R^3)\cap C\},
+\end{equation}
+and define the \emph{Thoams-Fermi functional}
+\begin{align}
+\nonumber\mathcal{E}_{TF}:\mathcal{D}&\to\R\\
+\rho&\mapsto\int_{\R^3}\left(\frac{3}{5}\gamma_{TF}\rho(x)^{5/3}-\phi(x)\rho(x)\right)\,dx+D[\rho],
+\end{align}
+where
+\[
+\phi(x):=\sum_{\kappa=1}^{K}\frac{Z_\kappa}{|x-R_\kappa|}
+\]
+and $\gamma_{TF}=\left(\frac{6\pi^2}{q}\right)^{2/3}$ with $q$ the number of possible spins.
+\end{defn}
+
+\subsection{Some physical motivation for Thomas-Fermi}
+
+If we look at free electrons in a box $[0,L]^3$ with periodic boundary conditions, then the eigenfunctions and eigenvalues are $\varphi_k=\frac{1}{L^{3/2}}e^{2\pi ik\cdot x/L}$, $E_k=(\frac{2\pi}{L}k)^2$, for $k\in\Z^3$. 
+
+If we have $N$ fermionic particles, then we occupy all states $|k|<R_F$, where $R_F$ is the Fermi radius and $q\cdot\#\{|k|<R_F\}=N$. Approximating $\sum_k$ by $\int dk$, this condition becomes $q\frac{4\pi}{3}R_F^3=N$. The total energy is then
+\begin{align*}
+E&=q\int_{|k|<R_F}\left(\frac{2\pi}{L}k\right)^2\,d^3k=\frac{4\pi^2}{L^2}q\cdot 4\pi\int_0^{(\frac{3N}{4\pi q})^{1/3}}k^4\,dk=\frac{4^{1/3}\pi^{4/3}\cdot 3^{5/3}N^{5/3}}{5L^2q^{2/3}}
+\end{align*}
+In terms of the density $\rho=\frac{N}{L^3}$, this is
+\[
+E=\frac{4^{1/3}3^{5/3}\pi^{4/3}}{5q^{2/3}}\rho^{5/3}L^3=\frac{3}{5}\cdot\frac{2^{2/3}3^{2/3}\pi^{4/3}}{q^{2/3}}\int_{[0,L]^3}\rho^{5/3}\,dx.
+\]
+In the non-free case, Thomas-Fermi assumes that the fermions are locally free. So their kinetic energy gets the same form as the free case above, and the remaining terms in the functional are interaction terms.
+
+
+\section{It is well-defined}
+To show this is well-defined, it remains to show that $\int\phi(x)\rho(x)\,dx\in\R$. Thus it suffices to show that $\int \rho(x)\frac{1}{|x-R|}<\infty$ for all $R$ and $\rho\in\mathcal{D}$. By changing variables, it is enough to show $\int\frac{\rho(x)}{|x|}\,dx<\infty$ for all $\rho\in\mathcal{D}$. To do this, write
+\[
+\frac{1}{|x|}=W_1+W_2,
+\]
+where
+\[
+W_1(x):=\int_{|y|\le1}\frac{1}{|x-y|}\frac{dy}{\frac{4\pi}{3}}=\int\frac{\sigma(y)}{|x-y|}\,dx,
+\]
+with $\sigma(y):=\frac{1}{\frac{4\pi}{3}}\Chi_{B_1(0)}(y)$. So $W_1$ is essentially a potential of charge 1 of size 1 smeared out on $B_1(0)$.
+\begin{thm}[Newton shell theorem]\label{thm:newton}
+For a spherical charge distribution $\rho(x)=f(|x|)$,
+\begin{equation}
+\phi(x):=\int\frac{\rho(y)}{|x-y|}\,dy=\int_0^\infty dr'\,\frac{4\pi r'^2f(r')}{\max\{|x|,r'\}}.
+\end{equation}
+\end{thm}
+Applying this to $W_1$, we see that $W_1(x)=\frac{1}{|x|}$ for $|x|\ge1$, which implies $\operatorname{supp}W_2\subseteq B_1(0)$.  Additionally,
+\[
+W_1(x)=\int_0^1dr'\,\frac{4\pi r'^2}{\max\{r',|x|\}}\frac{1}{\frac{4\pi}{3}}\le\frac{1}{|x|}\int_0^!\,dr\frac{4\pi r'^2}{\frac{4\pi}{3}}=\frac{1}{|x|},
+\]
+so $W_2(x)\ge0$.
+Then writing
+\begin{equation}
+\int\rho(x)\frac{1}{|x|}\,dx=\int\rho(x)W_1(x)\,dx+\int\rho(x)W_2(x)\,dx,
+\end{equation}
+we can compute:
+\begin{align*}
+\int_{\R^3}W_2(x)\rho(x)\,dx\le\int_{|x|\le1}\rho(x)\frac{1}{|x|}\,dx&\stackrel{\text{H\"older}}{\le}\left(\int_{|x|\le1}\rho(x)^{5/3}\,dx\right)^{3/5}\left(\int_{|x|\le1}\frac{1}{|x|^{5/2}}\right)^{2/5}\\
+&\le C\|\rho\|_{5/3}.
+\end{align*}
+For $W_1$, we compute
+\begin{align*}
+\int_{\R^3}\rho(x)W_1(x)\,dx&=\int dx\,\rho(x)\int dy\,\frac{\sigma(y)}{|x-y|}=\langle\rho,\sigma\rangle_C\\
+&\stackrel{\text{Schwarz}}{\le}\underbrace{\sqrt{D[\rho]}}_{<\infty}\sqrt{D[\sigma]}
+\end{align*}
+Finally,
+\begin{align*}
+\text{const.}\cdot D[\sigma]=\int_{|x|<1}\int_{|y|<1}\frac{\sigma(y)}{|x-y|}&=\int_0^1 dr'\,\int_0^1 dr\,\frac{4\pi r^24\pi r'^2}{\max\{r,r'\}}\\
+&=\text{const.}\cdot\int_0^1 dr'\,r'^2\int_0^1 dr\,\frac{r^2}{\max\{r,r'\}}\\
+&=\text{const.}\cdot\int_0^1 dr'\,dr'^2\left(\int_0^{r'}dr\,\frac{r^2}{r'}+\int_{r'}^1 dr\,\frac{r^2}{r}\right)<\infty.
+\end{align*}
+Thus $\mathcal{E}_{TF}$ is well-defined.
+
+\section{It has a unique minimizer} 
+\begin{lem}
+$\inf\mathcal{E}_{TF}>-\infty$.
+\end{lem}
+\begin{proof}
+As before the trouble term is $\int \phi(x)\rho(x)$. Using the same computations as before, we obtain
+\begin{align*}
+\int \phi(x)\rho(x)\,dx&=\sum_{\kappa=1}^{K}\int(Z_\kappa W_1(x-R_\kappa)+Z_\kappa W_2(x-R_\kappa))\rho(x)\,dx\\
+&\le\sum_{\kappa=1}^K Z_\kappa(\|\rho\|_{5/3}\|W_2\|_{5/2}+\sqrt{D[\rho]}\sqrt{D[\sigma]}\\
+&=Z_\text{total}(\|rho\|_{5/3}\|W_2\|_{5/2}+\sqrt{D[\rho]}\sqrt{D[\sigma]}.
+\end{align*}
+Thus
+\begin{equation}\label{eqn:ETF-lower-bound}
+\mathcal{E}_{TF}(\rho)\ge\frac{3}{5}\gamma_{TF}\|\rho\|_{5/3}^{5/3}-Z_\text{total}\|\rho\|_{5/3}\|W_2\|_{5/2}-Z_\text{total}D[\rho]^{1/2}D[\sigma]^{1/2}+D[\rho].
+\end{equation}
+Since $\|\rho\|_{5/3}$ is dominated by $\|\rho\|_{5/3}^{5/3}$ and $D[\rho]^{1/2}$ is dominated by $D[\rho]$, we conclude $\mathcal{E}_{TF}(\rho)\ge-M$.
+\end{proof}
+
+\begin{thm}
+There exists a unique $\rho_\mathrm{min}\in\mathcal{D}$ such that $\mathcal{E}_{TF}(\rho_\mathrm{min})=\inf\mathcal{E}(\mathcal{D})$.
+\end{thm}
+
+We will need:
+\begin{lem}[baby Banach-Alaoglu]
+Let $X$ be a reflesive Banach space and $x_n\in X$ a bounded sequence. Then there exists a subsequence $x_{n_\nu}$ and $x\in X$ such that
+\[
+\forall\,\ell\in X^*,\quad \ell(x_{n_\nu})\to \ell(x),\quad\text{as }\nu\to\infty.
+\]
+One says that $x_{n_\nu}\rightharpoonup x$ \emph{weakly}.
+\end{lem}
+
+\begin{proof}[Proof (existence of minimizer)]
+$\mathcal{E}_{TF}$ is coercive in $\|\cdot\|_{5/3}$-norm and in the $\|\cdot\|_C:=D[\cdot]^{1/2}$ ``Coulomb norm'', i.e. $\mathcal{E}_{TF}(\rho_n)\to\infty$ if $\|\rho_n\|_{5/3}\to\infty$ and $\mathcal{E}_{TF}(\rho_n)\to\infty$ if $\|\rho_n\|_C\to\infty$. This is immediate from our lower bound \eqref{eqn:ETF-lower-bound}. Thus any minimizing sequence $\rho_n$, i.e. $\lim\mathcal{E}_{TF}(\rho_n)=\inf\mathcal{E}_{TF}(\mathcal{D})$, must be bounded in $\|\cdot\|_{5/3}$ and $\|\cdot\|_C$-norm.
+
+By Banach-Alaoglu, extract a subsequence $\rho_{n_k}\rightharpoonup\rho\in L^{5/3}(\R^3)$ weakly in $L^{5/3}$. Now apply Banach-Alaoglu again, to obtain $\tilde{\rho}\in C$, and $\rho_{n_{k_\ell}}\rightharpoonup\tilde{\rho}$ weakly in $C$. So then $\rho_{n_{k_\ell}}$ converges weakly in both $L^{5/3}$ and $\mathcal{D}$. And in fact, $\rho=\tilde{\rho}$ (this was shown in homework sheet 5). %TODO put proof here
+
+Now we would like $\rho\in\mathcal{D}$. To this end we need $\rho\ge0$ a.e. Suppose there exists $\mathcal{N}$, $|\mathcal{N}|>0$ and $\rho<0$ on $\mathcal{N}$. Then there is $R$ so that $|B_R(0)\cap\mathcal{N}|>0$. Note $\Chi_{B_R(0)\cap\mathcal{N}}\in L^{5/2}$, so
+\[
+0\le\int\Chi_{B_R(0)\cap\mathcal{N}}(x)\rho_n(x)\to\int \Chi_{B_R(0)\cap\mathcal{N}}(x)\rho(x)<0,
+\]
+a contradiction. We can also repeat the argument to show $\rho$ has zero imaginary part. %Alternatively we can just deal with $\R$-Hilbert spaces.
+Thus $\rho\in\mathcal{D}$.
+
+Next, we hope that $\mathcal{E}_{TF}(\rho)=\inf\mathcal{E}_{TF}(\mathcal{D})$. We do this by showing
+\begin{equation}
+\mathcal{E}_{TF}(\rho)\le\varliminf \mathcal{E}_{TF}(\rho_n)=\inf\mathcal{E}_{TF}(\mathcal{D}),
+\end{equation}
+by comparing each term in $\mathcal{E}_{TF}(\rho)$ with the liminf of each term in $\mathcal{E}_{TF}(\rho_n)$.
+\begin{itemize}
+\item First, we have
+\begin{align*}
+\int\rho^{5/3}=\int\underbrace{\rho^{2/3}}_{\in L^{5/2}}\rho=\lim_{n\to\infty}\int \rho^{2/3}\rho_n\,dx&\le\varliminf\left(\int\rho^{5/3}\right)^{2/5}\left(\int\rho_n^{5/3}\right)^{3/5}\\
+&\le\left(\int\rho^{5/3}\right)^{2/5}\left(\varliminf\int \rho_n^{5/3}\right)^{3/5}
+\end{align*}
+If $\int \rho^{5/3}>0$ then we obtain $\int\rho^{5/3}\le\varliminf\int \rho_n^{5/3}$. This also holds trivially if $\int \rho^{5/3}=0$.
+\item We want to show 
+\begin{equation}\label{eqn:minimizer-nucleus}
+\int\sum_{\kappa=1}^K\frac{Z_\kappa}{|x-R_\kappa|}\rho_n(x)\,dx\to\int\sum_{\kappa=1}^K\frac{Z_\kappa}{|x-R_\kappa|}\rho(x)\,dx.
+\end{equation}
+%Suppose there is $J\subseteq\R^3$, $|J|>0$, with $\Im \rho(x)>0$ for $x\in J$. 
+It suffices to show convergence of $\int\frac{1}{|x-R|}\rho_n$. For this, use
+\begin{align*}
+\int\frac{1}{|x-R|}\rho_n&=\int W_1(x-R)\rho_n(x)\,dx+\int\underbrace{W_2(x-R)}_{\in L^{5/2}}\rho_n(x)\,dx\\
+&=(T_R\sigma,\rho_n)_C+\int\underbrace{W_2(x-R)}_{\in L^{5/2}}\rho_n(x)\,dx\\
+&\longrightarrow (T_R\sigma,\rho)_C+\int W_2(x-R)\rho(x)\,dx.
+\end{align*}
+Thus we conclude \eqref{eqn:minimizer-nucleus}.
+
+\item Write
+\[
+D[\rho]=(\rho,\rho)_C=\lim_{n\to\infty}(\rho,\rho_n)_C\stackrel{\text{Scharz}}{\le}\varliminf((\rho,\rho)_C^{1/2}(\rho_n,\rho_n)^{1/2}),
+\]
+which implies $D[\rho]\le\varliminf D[\rho_n]$.
+\end{itemize}
+Thus $\mathcal{E}_{TF}(\rho)\le\varliminf\mathcal{E}_{TF}(\rho_n)=\inf\mathcal{E}_{TF}(\mathcal{D})$, so $\mathcal{E}_{TF}(\rho)=\inf\mathcal{E}_{TF}(\mathcal{D})$.
+
+
+\end{proof}
+
+\begin{proof}[Proof (uniqueness of minimizer)]
+We claim $\mathcal{E}_{TF}:\mathcal{D}\to\R$ is strictly convex, i.e. $\mathcal{D}$ is convex and for all $\rho\ne\sigma\in\mathcal{D}$ and $\lambda\in(0,1)$,
+\[
+\mathcal{E}_{TF}(\lambda\rho+(1-\lambda)\sigma)<\lambda\mathcal{E}_{TF}(\rho)+(1-\lambda)\mathcal{E}_{TF}(\sigma).
+\]
+\begin{itemize}
+\item The $\int\rho^{5/3}$ term is easy, since $t\mapsto t^p$ is convex for $p>1$. Thus
+\[
+\int(\lambda\rho(x)+(1-\lambda)\sigma(x))^{5/3}\le\lambda\int\rho^{5/3}+(1-\lambda)\sigma^{5/3},
+\]
+with equality iff $\rho=\sigma$.
+\item The $\int\sum\frac{Z_\kappa}{|x-R_\kappa|}\rho$ term is linear.
+\item Compute
+\begin{align*}
+D[\lambda\rho+(1-\lambda)\sigma]&=\lambda^2(\rho,\rho)_C+(1-\lambda)^2(\sigma,\sigma)_C+2\lambda(1-\lambda)(\rho,\sigma)_C\\
+&\le \lambda^2(\rho,\rho)_C+(1-\lambda)^2(\sigma,\sigma)_C+2\lambda(\lambda-1)(\rho,\rho)_C^{1/2}(\sigma,\sigma)_C^{1/2}\\
+&=(\lambda(\rho,\rho)_C^{1/2}+(1-\lambda)(\sigma,\sigma)_C^{1/2})^2\\
+&\le\lambda(\rho,\rho)_C+(1-\lambda)(\sigma,\sigma)_C.
+\end{align*}
+The first inequality (Schwarz) has equality iff $\rho=k\sigma$ linear dependence, and second inequality (strict convexity of $t\mapsto t^2$) has equality iff $(\rho,\rho)=(\sigma,\sigma)$. 
+\end{itemize}
+Thus we have equality iff $\sigma=\rho$, so $\mathcal{E}_{TF}$ is strictly convex. 
+
+Now suppose $\mathcal{E}_{TF}(\rho)=\mathcal{E}_{TF}(\sigma)=\inf\mathcal{E}_{TF}(\mathcal{D})$. Then
+\[
+\mathcal{E}_{TF}\left(\frac{\rho+\sigma}{2}\right)<\frac{1}{2}\mathcal{E}_{TF}(\rho)+\frac{1}{2}\mathcal{E}_{TF}(\sigma)=\inf\mathcal{E}_{TF}(\mathcal{D}),
+\]
+unless $\rho=\sigma$.
+
+
+
+\end{proof}
+
+
+\begin{cor}
+Let $K=1$, which is the atomic case. Suppose $\rho$ is a minimizer of $\mathcal{E}_{TF}$. Then $\rho$ is spherically symmetric, i.e. for all rotation $R$ about 0, $\rho_R(x):=\rho(R^{-1}x)=\rho(x)$ a.e.
+\end{cor}
+\begin{proof}
+We plug in
+\[
+\mathcal{E}_{TF}(\rho_R)=\int_{\R^3}\left[\frac{3}{5}\gamma_{TF}\rho(R^{-1}x)^{5/3}-\frac{Z}{|x|}\rho(R^{-1}x)\right]\,dx+\frac{1}{2}\int dx\,\int dy\,\frac{\rho(R{-1}x)\rho(R^{-1}y)}{|x-y|}.
+\]
+Under change of variables $x\mapsto Rx$ and using $|Rx|=|x|$, we obtain
+\begin{align*}
+\mathcal{E}_{TF}(\rho_R)&=\int\left[\frac{3}{5}\gamma_{TF}\rho(x)^{5/3}-\frac{Z}{|Rx|}\rho(x)\right]\,dx+\frac{1}{2}\int dx\,\int dy\,\frac{\rho(x)\rho(y)}{|Rx-Ry|}\\
+&=\mathcal{E}_{TF}(\rho)=\inf\mathcal{E}_{TF}(\rho).
+\end{align*}
+By uniqueness $\rho_R=\rho$ a.e.
+\end{proof}
+
+\section{Euler-Lagrange equations (Thomas-Fermi equation)}
+Recall we are looking at:
+\begin{align*}
+\nonumber\mathcal{E}_{TF}(\rho)&=\int_{\R^3}\left(\frac{3}{5}\gamma_{TF}\rho(x)^{5/3}-V(x)\rho(x)\right)\,dx+D[\rho],\\
+V(x)&=\sum_{k=1}^K\frac{Z_k}{|x-R_k|}
+\end{align*}
+
+
+Let $\rho$ be a minimizer for $\mathcal{E}_{TF}(\mathcal{D})$, and let $\eta\in\mathcal{D}$. Define
+\[
+F_\eta(t):=\mathcal{E}_{TF}(\rho+t\eta).
+\]
+%is well-defined for all $t\in\R$. (Check the positive and negative parts of $\rho+t\eta$, since $\mathcal{E}_{TF}$ originally only defined by nonnegative functions.) 
+Because $\rho$ is a minimizer, we find the associated Euler-Lagrange equation by computing $\dot{F}_\eta(0)=0$. 
+
+First, to make sure $\rho+t\eta\in\mathcal{D}$ (need $\ge0$), choose $\eta\in\mathcal{D}$ such that $\operatorname{supp}\eta\subset P_\varepsilon:=\{x:\rho(x)>\varepsilon\}$ and that $\|\eta\|_\infty\le\frac{\varepsilon}{2}$. \footnote{Note, although we can define $\mathcal{E}_{TF}(\rho+t\eta)$ for all $t\in\R$, the minimizer is only a minimizer over \emph{nonnegative} $\rho\in L^{5/3}\cap C$. Thus we only know the functional derivative is zero for $\eta$ such that $\rho+t\eta\in\mathcal{D}$ for $t$ small. Additionally, restricting $\eta$ via $L^\infty$ norm is no problem, since the functional derivative is zero along \emph{any} allowable $\eta$.}
+Then $\rho+t\eta\in\mathcal{D}$ for $|t|\le1$, and we write
+\begin{equation}
+0=\dot{F}_\eta(0)=\left.\frac{d}{dt}\right|_{t=0}\left[\int\frac{3}{5}\gamma_{TF}(\rho+t\eta)^{5/3}-V(x)(\rho(x)+t\eta(x))+D[\rho+t\eta,\rho+t\eta]\right].
+\end{equation}
+\begin{itemize}
+\item The last two terms are easy:
+\begin{align*}
+\left.\frac{d}{dx}\right|_{t=0}D[\rho+t\eta,\rho+t\eta]&=\left.\frac{d}{dx}\right|_{t=0}(D[\rho,\rho]+2D[\eta,\rho]t+D[\eta,\eta]t^2)\\
+&=2D[\eta,\rho]=\int dx\,\eta(x)\int dy\,\frac{\rho(y)}{|x-y|}
+\end{align*}
+and
+\[
+\left.\frac{d}{dx}\right|_{t=0}\left(-\int V(x)(\rho(x)+t\eta(x))\right)=-\int V(x)\eta(x).
+\]
+\item For the first term, this was a homework exercise to show that we can interchange derivative and integral using dominated convergence (and possibly mean value theorem). After justifying this interchange, we obtain
+\[
+\left.\frac{d}{dt}\right|_{t=0}\int(\rho+t\eta)^{5/3}=\int\frac{5}{3}\rho^{2/3}\eta.
+\]
+\end{itemize}
+Thus
+\begin{equation*}
+0=\dot{F}_\eta(0)=\int\underbrace{\left(\gamma_{TF}\rho^{2/3}-V+\rho*\frac{1}{|\cdot|}\right)}_{=:G(x)}\eta,
+\end{equation*}
+so that\footnote{else take $\operatorname{supp}(\eta)\subset P_\varepsilon\cap\operatorname{supp}G_+(x)$, then $0=\int G\eta\ge0$ with equalty iff $G_+=0$. Repeat for $G_-$.} on $P_\varepsilon$,
+\begin{equation}
+\gamma_{TF}\rho(x)^{2/3}-V(x)+\rho*\frac{1}{|\cdot|}(x)=0,\quad x\in P_\varepsilon.
+\end{equation}
+
+Thus
+\begin{align*}
+\gamma_{TF}\rho^{2/3}(x)&=\phi_{TF}(x),\quad \text{if }\rho(x)>0\\
+\phi_{TF}:&=V-\rho*\frac{1}{|\cdot|}.
+\end{align*}
+%so $\gamma_{TF}\rho^{2/3}(x)=\phi_{TF}(x)$ whenever $\rho(x)>0$.
+
+Now for the set $\mathcal{N}:=\{x:\rho(x)=0\}$. In this case, take $F_\eta(t)=\mathcal{E}_{TF}(\rho+t\eta)$, with $t\ge0$ and $\operatorname{supp}\eta\subseteq\mathcal{N}$. Here we only know $\dot{F}_\eta^+(0)\ge0$ since we just decrase down to a minimium as $t\searrow0$. Thus $\gamma_{TF}\rho^{2/3}\ge\phi_{TF}$ on $\mathcal{N}$, and we obtain
+\begin{equation}
+\gamma_{TF}\rho^{2/3}(x)\begin{cases}
+=\phi_{TF}(x),&\rho(x)>0\\
+\ge\phi_{TF}(x),&\rho(x)=0
+\end{cases}.
+\end{equation}
+We will shortly show however that in fact equality holds a.e.
+
+
+\begin{lem}
+For $\rho\in\mathcal{D}$, $\psi(x):=\int_{\R^3}\frac{dy}{|x-y|}\rho(y)$ is continuous.
+\end{lem}
+\begin{proof}
+Compute
+\begin{align*}
+|\psi(x+h)-\psi(x)|&=\left|\int_{\R^3}dy\,\rho(y)\left(\frac{1}{|x+h-y|}-\frac{1}{|x-y|}\right)\right|\\
+&\stackrel{\text{H\"older}}{\le}\left(\int\rho^{5/3}\right)^{3/5}\left(\int\left(\frac{1}{|x+h-y|}-\frac{1}{|x-y|}\right)^{5/2}\right)^{2/5}\\
+\end{align*}
+Now compute some more. First use $||x-y|-|x+h-y||\le|h|$, then
+\begin{align*}
+\int_{\R^3}\left|\frac{1}{|x+h-y|}-\frac{1}{|x-y|}\right|^{5/3}&\le\int_{\R^3}\left(\frac{|h|}{|h-y||y|}\right)^{5/2}\,dy=\int_{\R^3}\frac{|h|^{5/2}}{(|h|\hat{\mathbf{e}}-y)|y|)^{5/2}}\,dy.
+\intertext{Substitute $y\mapsto|h|y$ to obtain}
+&=|h|^{5/2-\frac{10}{2}+3}\int_{\R^3}\frac{1}{(|\hat{\mathbf{e}}-y|y|)^{5/3}}\,dy\\
+&=|h|^{1/2}\cdot\#\longrightarrow 0.
+\end{align*}
+\end{proof}
+
+\begin{cor}[Thomas-Fermi equation]\label{thm:euler-lagrange}
+The Thomas-Fermi equation also holds a.e. for molecules, i.e.
+\begin{equation}\label{eqn:euler-lagrange}
+\gamma_{TF}\rho_{TF}^{2/3}(x)=\sum\frac{Z_\kappa}{|x-R_\kappa|}-\int_{\R^3}\frac{\rho_{TF}(y)}{|x-y|}\,dy=\phi_{TF}(x).
+\end{equation}
+\end{cor}
+\noindent\textsc{Warning!} The situation is different, when we minimize under the constraint $\int\rho=N\ne\sum_{\kappa=1}^{K}Z_\kappa$. (Lagrange multiplier?) %TODO lagrange multiplier?
+\begin{proof}
+Let $\mathcal{N}:=\{x:\phi_{TF}(x)<0\}$ which is open since $\phi_{TF}$ is continuous. Then $R_1,\ldots,R_k\not\in\mathcal{N}$ and $\rho_{TF}=0$ on $\mathcal{N}$. Since
+\[
+-\frac{1}{4\pi}\Delta\phi_{TF}(x)=\sum_{\kappa=1}^{N}Z_\kappa\delta(x-R_\kappa)-\rho_{TF}(x),
+\]
+then $\phi_{TF}$ is \emph{harmonic} on the open set $\mathcal{N}$. Thus it takes its minimum (and maximum) on the boundary or at infinity. But there $\phi_{TF}=0$, so $\phi_{TF}(x)=0$ on $\mathcal{N}$, contradiction.
+\end{proof}
+
+
+\section{No negative ions}
+\begin{thm}[Benguria]
+If $\rho$ is a minimizer of the atomic ($K=1$) TF-functional, then $N:=\int\rho\le Z$.
+\end{thm}
+
+\begin{cor}[of Benguia]
+Let $\rho$ be a minimizer. Then
+\begin{align*}
+\frac{Z}{|x|}-\int\frac{\rho(y)}{|x-y|}\,dy&=\frac{Z}{|x|}-\int dr'\,\frac{4\pi r'^2\rho(r')}{\max\{|x|,r'\}}\\
+&\ge\frac{Z}{|x|}-\frac{1}{|x|}N=\frac{Z-N}{|x|}\ge0,
+\end{align*}
+which implies $\gamma_{TF}\rho^{2/3}=\phi_{TF}$ a.e. for atomic TF.
+\end{cor} % phi_TF > 0 then rho > 0. phi_TF = 0 then equal sitll.
+
+
+
+\begin{proof}[Proof (of Benguia)]
+Suppose $\int\rho=N>Z$. Then there exists a minimal $R$ such that $\int_{|x|<R}\rho=Z$. Set $\rho_R(x):=\rho\Chi_{B_R}(0)$ and $\tau:=\rho-\rho_R\ne0$. Then
+\begin{align*}
+\mathcal{E}_{TF}(\rho)-\mathcal{E}_{TF}(\rho_R)&=\int\frac{3}{5}\gamma_{TF}(\rho_R+\tau)^{5/3}-\int\frac{3}{5}\gamma_{TF}\rho_R^{5/3}-\int V(x)\tau + D[\rho_R+\tau,\rho_R+\tau]-D[\rho_R,\rho_R]
+\intertext{Since $\rho_R$ and $\tau$ live on different sets, $(\rho_R+\tau)^{5/3}=\rho_R^{5/3}+\tau^{5/3}$. Thus,}
+&=\int\frac{3}{5}\gamma_{TF}\tau^{5/3}-\int\frac{Z}{|x|}\tau(x)\,dx+D[\tau,\tau]+2D[\rho_R,\tau]
+\intertext{As $R\to\infty$, $2D[\rho_R,\tau]\to\int\frac{Z}{|x|}\tau(x)\,dx$ by using Newton's theorem \ref{thm:newton} and $\operatorname{supp}\tau\subseteq B_R(0)^c$ (so $|x|>R$ in Newton). Thus this term cancels with the second term, leaving}
+&\ge \int\frac{3}{5}\gamma_{TF}\tau^{5/3}+D[\tau]>0,
+\end{align*}
+contradicting $\rho$ a minimizer.
+\end{proof}
+
+
+\begin{thm}[no negative ions]
+Let $\rho_{TF}$ be the minimizer of the usual $\mathcal{E}_{TF}$ on $\mathcal{D}$. Then
+\begin{equation}
+\int \rho_{TF}\le Z_1+\cdots+Z_K.
+\end{equation}
+\end{thm}
+\begin{proof}[Proof idea]
+Suppose $\int \rho_{TF}(x)\,dx=N>Z_1+\cdots+Z_K$. The there exists an $R$ such that for all $|x|>R$, 
+\[
+\int\frac{\rho_{TF}(y)}{|x-y|}\ge\frac{Z_1+\cdots+Z_K+\frac{Q}{2}}{|x|}.
+\]
+%TODO idk what is Q or Q/2
+At infinity, 
+\[
+\sum_{ \kappa=1}^K\frac{Z_\kappa}{|x-R_\kappa|}\sim\frac{Z_1+\cdots+Z_K}{|x|},
+\]
+so that $\phi_{TF}\lesssim\frac{-Q/2}{|x|}$ asymptotically, contradicting the Thomas-Fermi equation Corollary~\ref{eqn:euler-lagrange} (the part that $\phi_{TF}\ge0$).
+\end{proof}
+
+
+\begin{thm}
+\begin{equation}
+\int \rho_{TF}=Z_1+\cdots+Z_K.
+\end{equation}
+\end{thm}
+\begin{proof}[Proof idea]
+The idea is similar to the previous theorem. Suppose $\int\rho_{TF}<Z_1+\cdots Z_K$. Then at $\infty$,
+\[
+\phi_{TF}(x)=\sum\frac{Z_\kappa}{x-R_\kappa}-\rho*\frac{1}{|\cdot|}(x)\gtrsim\frac{\varepsilon}{|x|},\quad\text{some }\varepsilon>0.
+\]
+Using the Euler-Lagrange/Thomas-Fermi equation, $\rho_{TF}=\left(\frac{\phi_{TF}}{\gamma_{TF}}\right)^{3/2}$, and the previous theorem implies
+\[
+Z_1+\cdots+Z_K\ge\int\rho_{TF}=\int\left(\frac{\phi_{TF}}{\gamma_{TF}}\right)^{3/2}=\infty,
+\]
+contradiction.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{Atoms do not bind (Teller)}
+\begin{rmk}
+Sometimes we will add an additional term $\sum_{1\le k<\lambda\le K}\frac{Z_kZ_\lambda}{|R_k-R_\lambda|}$ to $\mathcal{E}_{TF}$. But this is just a constant so doesn't affect our previous results. However, in this section, we will add this term because we look at dependence on $Z_k$ and $R_k$.
+\end{rmk}
+
+\begin{lem}[Teller]
+Let $\mathcal{Z}=(Z_1,\ldots,Z_K)$, $\mathcal{Z}'\in\R_+^K$, and suppose for all $\kappa$, $Z_\kappa\ge Z'\kappa$. (Write $\mathcal{Z}\ge\mathcal{Z}'$.) Then for all $x$,
+\begin{align}
+\phi_\mathcal{Z}(x)&\ge\phi_{\mathcal{Z}'}(x)\\
+\rho_\mathcal{Z}(x)&\ge\rho_{\mathcal{Z}'}(x).
+\end{align}
+(These are the minimizers and associated $\phi_{TF}$.)
+\end{lem}
+\begin{proof}
+We use a subharmonic argument as in Corollary~\ref{thm:euler-lagrange}.
+Let $\eta:=\phi_\mathcal{Z}-\phi_{\mathcal{Z'}}$. Assume $Z_j>Z_j'$ for $1\le j\le \ell$, $\ell\ge1$, and $Z_j=Z_j'$ for $j>\ell$. Let $\mathcal{N}:=\{x:\eta(x)<0\}$ and note $R_1,\ldots,R_\ell\not\in\mathcal{N}$. Then $\eta$ is continuous away from $R_1,\ldots,R_\ell$. Thus
+\[
+-4\pi\Delta\eta=\underbrace{\sum_{\kappa=1}^{\ell}(Z_\kappa-Z_\kappa')\delta(x-R_\kappa)}_{=0\text{ on }\mathcal{N}}-(\rho_\mathcal{Z}-\rho_{\mathcal{Z}'})=-\frac{1}{\gamma_{TF}^{3/2}}\underbrace{(\phi_\mathcal{Z}^{3/2}-\phi_{\mathcal{Z}'}^{3/2})}_{<0\text{ on }\mathcal{N}}>0.
+\]
+Thus $\eta$ is superharmonic so it obtains its minimum on the boundary (where it is zero) which implies $\mathcal{N}=\emptyset$. The result for $\rho_\mathcal{Z},\rho_\mathcal{Z'}$ then follows from the Euler-Lagrange equation \eqref{eqn:euler-lagrange}.
+\end{proof}
+
+\begin{thm}[Teller]
+Let $\mathcal{K}=\{1,\ldots,K\}$, $I\subset\mathcal{K}$. Define
+\begin{equation}
+\mathcal{E}_{I,a}(\rho):=\int\left(\frac{3}{5}\gamma_{TF}\rho^{5/3}-\sum_{k\in I}\frac{aZ_k}{|x-R_k|}\rho\right)+D[\rho]+\sum_{\substack{k,\ell\in I\\k<\ell}}\frac{aZ_k aZ_\ell}{|R_k-R_\ell|}
+\end{equation}
+and
+\begin{equation*}
+E_{I,a}:=\inf \mathcal{E}_{I,a}(\mathcal{D})=\mathcal{E}_{I,a}(\rho_{I,a}).
+\end{equation*}
+Then
+\begin{equation}
+E_{\mathcal{K},1}-E_{I,1}-E_{I^C,1}\ge0.
+\end{equation}
+Equality can only hold if $I$ is trivial, i.e. $I=\emptyset$ or $I=\mathcal{K}$.
+\end{thm}
+This means that it is never energetically favorable to bind atoms together to form molecules; it is energetically favorable for the atoms to fly apart and go to $\infty$.
+
+
+\begin{proof}
+We don't prove the statement about when equality holds. We assume $I$ is nontrivial and define
+\[
+F(a):=E_{\mathcal{K},a}-E_{I,a}-E_{I^C,a}.
+\]
+On the homework, one shows $F$ is differentiable. Then
+\[
+F(1)=\underbrace{F(0)}_{=0}+\int_0^1\dot{F}(a)\,da.
+\]
+Thus it is enough to show $\dot{F}(a)\ge0$. Let 
+\[
+\phi_{I,a}(R):=\sum_{k\in I}\frac{Z_k}{|R-R_k|}-(\rho_{I,a}*\frac{1}{|\cdot|})(R).
+\]
+Then (this is essentially the Feynman-Hellman theorem for Thomas-Fermi) using homework sheet 6,
+\begin{align*}
+\frac{d}{da}E_{I,a}&=\sum_{k\in I}Z_k\left[-\int dx\,\frac{\rho_{I,a}(x)}{|R_k-x|}+\sum_{\substack{\ell\in I\\\ell\ne k}}\frac{aZ_\ell}{|R_k-R_\ell|}\right]\\
+&=\sum_{k\in I}Z_k\lim_{\substack{R\to R_k\\R\ne R_k}}\left(-\int\frac{\rho_{I,k}(x)}{|R-x|}\,dx+\sum_{\substack{\ell\in I\\\ell\ne k}}\frac{aZ_\ell}{|R-R_\ell|}\right)\\
+&=\sum_{k\in I}Z_k\lim_{\substack{R\to R_k\\R\ne R_k}}\left(\phi_{I,a}(R)-\frac{a Z_k}{|R-R_k|}\right).
+\end{align*}
+(Note in the first line, we are not missing a factor of 2 in the second sum because we sum over all $\ell\ne k$ while the original sum was over $\ell<k$.)
+
+Thus
+\begin{align*}
+\dot{F}(a)&=\sum_{k\in\mathcal{K}}Z_k\lim_{R\to R_k}\left(\phi_{\mathcal{K},a}(R)-\frac{aZ_k}{|R-R_k|}\right)-\sum_{k\in I}Z_k\lim_{R\to R_k}\left(\phi_{I,a}(R)-\frac{aZ_k}{|R-R_k|}\right)-\\
+&\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad -\sum_{k\in I^C}Z_k\lim_{R\to R_k}\left(\phi_{I^c,a}(R)-\frac{aZ_k}{|R-R_k|}\right)\\
+&=\sum_{k\in I}Z_k\lim_{R\to R_k}(\underbrace{\phi_{\mathcal{K},a}(R)-\phi_{I,a}(R)}_{\ge0\text{ (lemma)}})+\sum_{k\in I^c}Z_k\lim_{R\to R_k}(\underbrace{\phi_{\mathcal{K},a}(r)-\phi_{I^c,a}(R)}_{\ge0})\ge0.
+\end{align*}
+
+
+\end{proof}
+
+
+\section{Matter is stable thermodynamically}
+
+Recall from statistical mechanics that extensive properties scale like the number of particles involved. For example, volume, energy, entropy, etc. are extensive quantities. Intensive properties like temperature and pressure do not scale.
+
+Conveniently, matter is stable (in the thermodynamic sense) in Thomas-Fermi theory. Energy does not drop faster than linearly, so matter does not collapse: By Keller,
+\begin{align*}
+E_{\mathcal{K},1}\ge\sum_{k=1}^KE_{\{1\},1}&=\sum_{k=1}^K\inf_{\rho\in\mathcal{D}}\left[\int\left(\frac{3}{5}\gamma_{TF}\rho^{5/3}-\frac{Z_k}{|x|}\rho(x)\right)\,dx+D[\rho]\right]\\
+&=\sum_{k=1}^K Z_k^{7/3}E_{TF,\text{atom}}(1)\ge -MK,
+\end{align*}
+where we used $E_{TF}(Z)=Z^{7/3}E_{TF}(1)$ for atomic TF (homework sheet 6, do the substitution $\varphi_{TF,Z}(x)=Z^{4/3}\varphi_{TF}(Z^{1/3}x)$).
+Later we will show that Thomas-Fermi gives the correct asymptotic (large $Z$) behavior.
+
+
+
+
+
+
+\begin{thebibliography}{99}
+\bibitem{lieb} E. H. Lieb, \textit{Thomas-fermi and related theories of atoms and molecules}, Rev. Mod. Phys. 53, 603-641 (1981).
+
+\bibitem{lieb-loss} E. H. Lieb and M. Loss, \textit{Analysis}.
+
+\bibitem{lieb-simon} E. H. Lieb and B. Simon, \textit{The Thomas-Fermi Theory of Atoms, Molecules and Solids}, Advances in Mathematics 23, 22-116 (1977).
+
+\bibitem{simon} B. Simon, \textit{Functional Integration and Quantum Physics}, Academic Press, 1979.
+
+\bibitem{thirring} W. Thirring, \textit{Mathematische Physik IV} (vol II for English translation).
+\end{thebibliography}
+
+
+
+
+
+\end{document}
