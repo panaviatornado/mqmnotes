@@ -7,7 +7,8 @@ Martin Peev with some corrections by Robert Helling (helling@lmu.de).
 There is no claim whatsoever of correctness or completeness. Use at
 your own risk!
 
-To compile the tex file using texlive, the following 
+To compile the file `Lecture Notes Mathematical Quantum Mechanics.tex` 
+using texlive, the following 
 packages should be sufficient. On a Debian-like system, install via:
 <!--
 ```
@@ -24,3 +25,4 @@ texlive-science
 ```
 sudo apt-get install texlive texlive-base texlive-binaries texlive-fonts-recommended texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-math-extra texlive-science
 ```
+This should be enough to compile the other tex files as well.
