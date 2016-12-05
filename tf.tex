@@ -126,7 +126,7 @@ Heuristically,
 \[
 \int dx\int dy\,\frac{\overline{\rho(x)}\rho(y)}{|x-y|}=c\int d\xi\,\frac{|\hat{\rho}(\xi)|^2}{|\xi|^2}\ge0,
 \]
-with equality iff $\hat{\rho}=0$ a.e. i.e. $\rho=0$ a.e. So sesquilinear is obvious and positivity follows heuristically by the Fourier transform. (For an actual proof, see Theorem~9.8 in \cite{lieb-loss}.
+with equality iff $\hat{\rho}=0$ a.e. i.e. $\rho=0$ a.e. So sesquilinear is obvious and positivity follows heuristically by the Fourier transform. (For an actual proof, see Theorem~9.8 in \cite{lieb-loss}.)
 
 \begin{defn}
 Set
@@ -161,7 +161,7 @@ In the non-free case, Thomas-Fermi assumes that the fermions are locally free. S
 
 
 \section{It is well-defined}
-To show this is well-defined, it remains to show that $\int\phi(x)\rho(x)\,dx\in\R$. Thus it suffices to show that $\int \rho(x)\frac{1}{|x-R|}<\infty$ for all $R$ and $\rho\in\mathcal{D}$. By changing variables, it is enough to show $\int\frac{\rho(x)}{|x|}\,dx<\infty$ for all $\rho\in\mathcal{D}$. To do this, write
+To show that $\mathcal{E}_{TF}$ is well-defined, it remains to show that $\int\phi(x)\rho(x)\,dx\in\R$. Thus it suffices to show that $\int \rho(x)\frac{1}{|x-R|}<\infty$ for all $R$ and $\rho\in\mathcal{D}$. By changing variables, it is enough to show $\int\frac{\rho(x)}{|x|}\,dx<\infty$ for all $\rho\in\mathcal{D}$. To do this, write
 \[
 \frac{1}{|x|}=W_1+W_2,
 \]
@@ -178,7 +178,7 @@ For a spherical charge distribution $\rho(x)=f(|x|)$,
 \end{thm}
 Applying this to $W_1$, we see that $W_1(x)=\frac{1}{|x|}$ for $|x|\ge1$, which implies $\operatorname{supp}W_2\subseteq B_1(0)$.  Additionally,
 \[
-W_1(x)=\int_0^1dr'\,\frac{4\pi r'^2}{\max\{r',|x|\}}\frac{1}{\frac{4\pi}{3}}\le\frac{1}{|x|}\int_0^!\,dr\frac{4\pi r'^2}{\frac{4\pi}{3}}=\frac{1}{|x|},
+W_1(x)=\int_0^1dr'\,\frac{4\pi r'^2}{\max\{r',|x|\}}\frac{1}{\frac{4\pi}{3}}\le\frac{1}{|x|}\int_0^1\,dr\frac{4\pi r'^2}{\frac{4\pi}{3}}=\frac{1}{|x|},
 \]
 so $W_2(x)\ge0$.
 Then writing
@@ -199,7 +199,7 @@ Finally,
 \begin{align*}
 \text{const.}\cdot D[\sigma]=\int_{|x|<1}\int_{|y|<1}\frac{\sigma(y)}{|x-y|}&=\int_0^1 dr'\,\int_0^1 dr\,\frac{4\pi r^24\pi r'^2}{\max\{r,r'\}}\\
 &=\text{const.}\cdot\int_0^1 dr'\,r'^2\int_0^1 dr\,\frac{r^2}{\max\{r,r'\}}\\
-&=\text{const.}\cdot\int_0^1 dr'\,dr'^2\left(\int_0^{r'}dr\,\frac{r^2}{r'}+\int_{r'}^1 dr\,\frac{r^2}{r}\right)<\infty.
+&=\text{const.}\cdot\int_0^1 dr'\,r'^2\left(\int_0^{r'}dr\,\frac{r^2}{r'}+\int_{r'}^1 dr\,\frac{r^2}{r}\right)<\infty.
 \end{align*}
 Thus $\mathcal{E}_{TF}$ is well-defined.
 
@@ -212,7 +212,7 @@ As before the trouble term is $\int \phi(x)\rho(x)$. Using the same computations
 \begin{align*}
 \int \phi(x)\rho(x)\,dx&=\sum_{\kappa=1}^{K}\int(Z_\kappa W_1(x-R_\kappa)+Z_\kappa W_2(x-R_\kappa))\rho(x)\,dx\\
 &\le\sum_{\kappa=1}^K Z_\kappa(\|\rho\|_{5/3}\|W_2\|_{5/2}+\sqrt{D[\rho]}\sqrt{D[\sigma]}\\
-&=Z_\text{total}(\|rho\|_{5/3}\|W_2\|_{5/2}+\sqrt{D[\rho]}\sqrt{D[\sigma]}.
+&=Z_\text{total}(\|\rho\|_{5/3}\|W_2\|_{5/2}+\sqrt{D[\rho]}\sqrt{D[\sigma]}).
 \end{align*}
 Thus
 \begin{equation}\label{eqn:ETF-lower-bound}
@@ -322,7 +322,7 @@ Let $K=1$, which is the atomic case. Suppose $\rho$ is a minimizer of $\mathcal{
 \begin{proof}
 We plug in
 \[
-\mathcal{E}_{TF}(\rho_R)=\int_{\R^3}\left[\frac{3}{5}\gamma_{TF}\rho(R^{-1}x)^{5/3}-\frac{Z}{|x|}\rho(R^{-1}x)\right]\,dx+\frac{1}{2}\int dx\,\int dy\,\frac{\rho(R{-1}x)\rho(R^{-1}y)}{|x-y|}.
+\mathcal{E}_{TF}(\rho_R)=\int_{\R^3}\left[\frac{3}{5}\gamma_{TF}\rho(R^{-1}x)^{5/3}-\frac{Z}{|x|}\rho(R^{-1}x)\right]\,dx+\frac{1}{2}\int dx\,\int dy\,\frac{\rho(R^{-1}x)\rho(R^{-1}y)}{|x-y|}.
 \]
 Under change of variables $x\mapsto Rx$ and using $|Rx|=|x|$, we obtain
 \begin{align*}
@@ -507,7 +507,7 @@ Sometimes we will add an additional term $\sum_{1\le k<\lambda\le K}\frac{Z_kZ_\
 \end{rmk}
 
 \begin{lem}[Teller]
-Let $\mathcal{Z}=(Z_1,\ldots,Z_K)$, $\mathcal{Z}'\in\R_+^K$, and suppose for all $\kappa$, $Z_\kappa\ge Z'\kappa$. (Write $\mathcal{Z}\ge\mathcal{Z}'$.) Then for all $x$,
+Let $\mathcal{Z}=(Z_1,\ldots,Z_K)$, $\mathcal{Z}'\in\R_+^K$, and suppose for all $\kappa$, $Z_\kappa\ge Z'_\kappa$. (Write $\mathcal{Z}\ge\mathcal{Z}'$.) Then for all $x$,
 \begin{align}
 \phi_\mathcal{Z}(x)&\ge\phi_{\mathcal{Z}'}(x)\\
 \rho_\mathcal{Z}(x)&\ge\rho_{\mathcal{Z}'}(x).
