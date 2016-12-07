@@ -133,7 +133,7 @@ Set
 \begin{equation}
 \mathcal{D}:=\{\rho\ge0:\rho\in L^{5/3}(\R^3)\cap C\},
 \end{equation}
-and define the \emph{Thoams-Fermi functional}
+and define the \emph{Thomas-Fermi functional}
 \begin{align}
 \nonumber\mathcal{E}_{TF}:\mathcal{D}&\to\R\\
 \rho&\mapsto\int_{\R^3}\left(\frac{3}{5}\gamma_{TF}\rho(x)^{5/3}-\phi(x)\rho(x)\right)\,dx+D[\rho],
@@ -227,7 +227,7 @@ There exists a unique $\rho_\mathrm{min}\in\mathcal{D}$ such that $\mathcal{E}_{
 
 We will need:
 \begin{lem}[baby Banach-Alaoglu]
-Let $X$ be a reflesive Banach space and $x_n\in X$ a bounded sequence. Then there exists a subsequence $x_{n_\nu}$ and $x\in X$ such that
+Let $X$ be a reflexive Banach space and $x_n\in X$ a bounded sequence. Then there exists a subsequence $x_{n_\nu}$ and $x\in X$ such that
 \[
 \forall\,\ell\in X^*,\quad \ell(x_{n_\nu})\to \ell(x),\quad\text{as }\nu\to\infty.
 \]
@@ -239,7 +239,7 @@ $\mathcal{E}_{TF}$ is coercive in $\|\cdot\|_{5/3}$-norm and in the $\|\cdot\|_C
 
 By Banach-Alaoglu, extract a subsequence $\rho_{n_k}\rightharpoonup\rho\in L^{5/3}(\R^3)$ weakly in $L^{5/3}$. Now apply Banach-Alaoglu again, to obtain $\tilde{\rho}\in C$, and $\rho_{n_{k_\ell}}\rightharpoonup\tilde{\rho}$ weakly in $C$. So then $\rho_{n_{k_\ell}}$ converges weakly in both $L^{5/3}$ and $\mathcal{D}$. And in fact, $\rho=\tilde{\rho}$ (this was shown in homework sheet 5). %TODO put proof here
 
-Now we would like $\rho\in\mathcal{D}$. To this end we need $\rho\ge0$ a.e. Suppose there exists $\mathcal{N}$, $|\mathcal{N}|>0$ and $\rho<0$ on $\mathcal{N}$. Then there is $R$ so that $|B_R(0)\cap\mathcal{N}|>0$. Note $\Chi_{B_R(0)\cap\mathcal{N}}\in L^{5/2}$, so
+Now we would like $\rho\in\mathcal{D}$. To this end we need $\rho\ge0$ a.e. Suppose there exists $\mathcal{N}$, $|\mathcal{N}|>0$ and $\rho<0$ on $\mathcal{N}$. Then there is $R$ so that $|B_R(0)\cap\mathcal{N}|>0$. Note $\Chi_{B_R(0)\cap\mathcal{N}}\in L^{5/2}$, so writing $\rho_n$ for the subsubsequence (for notational convenience), we obtain
 \[
 0\le\int\Chi_{B_R(0)\cap\mathcal{N}}(x)\rho_n(x)\to\int \Chi_{B_R(0)\cap\mathcal{N}}(x)\rho(x)<0,
 \]
@@ -404,9 +404,9 @@ Compute
 \end{align*}
 Now compute some more. First use $||x-y|-|x+h-y||\le|h|$, then
 \begin{align*}
-\int_{\R^3}\left|\frac{1}{|x+h-y|}-\frac{1}{|x-y|}\right|^{5/3}&\le\int_{\R^3}\left(\frac{|h|}{|h-y||y|}\right)^{5/2}\,dy=\int_{\R^3}\frac{|h|^{5/2}}{(|h|\hat{\mathbf{e}}-y)|y|)^{5/2}}\,dy.
+\int_{\R^3}\left|\frac{1}{|x+h-y|}-\frac{1}{|x-y|}\right|^{5/2}&\le\int_{\R^3}\left(\frac{|h|}{|h-y||y|}\right)^{5/2}\,dy=\int_{\R^3}\frac{|h|^{5/2}}{(|h|\hat{\mathbf{e}}-y)|y|)^{5/2}}\,dy.
 \intertext{Substitute $y\mapsto|h|y$ to obtain}
-&=|h|^{5/2-\frac{10}{2}+3}\int_{\R^3}\frac{1}{(|\hat{\mathbf{e}}-y|y|)^{5/3}}\,dy\\
+&=|h|^{5/2-\frac{10}{2}+3}\int_{\R^3}\frac{1}{(|\hat{\mathbf{e}}-y|y|)^{5/2}}\,dy\\
 &=|h|^{1/2}\cdot\#\longrightarrow 0.
 \end{align*}
 \end{proof}
@@ -577,7 +577,7 @@ Thus
 
 Recall from statistical mechanics that extensive properties scale like the number of particles involved. For example, volume, energy, entropy, etc. are extensive quantities. Intensive properties like temperature and pressure do not scale.
 
-Conveniently, matter is stable (in the thermodynamic sense) in Thomas-Fermi theory. Energy does not drop faster than linearly, so matter does not collapse: By Keller,
+Conveniently, matter is stable (in the thermodynamic sense) in Thomas-Fermi theory. Energy does not drop faster than linearly, so matter does not collapse: By Teller,
 \begin{align*}
 E_{\mathcal{K},1}\ge\sum_{k=1}^KE_{\{1\},1}&=\sum_{k=1}^K\inf_{\rho\in\mathcal{D}}\left[\int\left(\frac{3}{5}\gamma_{TF}\rho^{5/3}-\frac{Z_k}{|x|}\rho(x)\right)\,dx+D[\rho]\right]\\
 &=\sum_{k=1}^K Z_k^{7/3}E_{TF,\text{atom}}(1)\ge -MK,
@@ -593,7 +593,7 @@ Later we will show that Thomas-Fermi gives the correct asymptotic (large $Z$) be
 \begin{thebibliography}{99}
 \bibitem{lieb} E. H. Lieb, \textit{Thomas-fermi and related theories of atoms and molecules}, Rev. Mod. Phys. 53, 603-641 (1981).
 
-\bibitem{lieb-loss} E. H. Lieb and M. Loss, \textit{Analysis}.
+\bibitem{lieb-loss} E. H. Lieb and M. Loss, \textit{Analysis 2nd edition}, Graduate Studies in Mathematics 14 (2001).
 
 \bibitem{lieb-simon} E. H. Lieb and B. Simon, \textit{The Thomas-Fermi Theory of Atoms, Molecules and Solids}, Advances in Mathematics 23, 22-116 (1977).
 

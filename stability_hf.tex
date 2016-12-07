@@ -109,7 +109,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title[]{Stability of Matter (MQM WS2016-17)}
+\title[]{Stability of Matter and Hartree-Fock (MQM WS2016-17)}
 \date{\today}
 
 \maketitle
@@ -153,7 +153,7 @@ i.e.
 \end{thm}
 
 \begin{proof}
-First note that by Keller,
+First note that by Teller,
 \begin{align*}
 E_{TF}(\mathcal{Z})&\ge E_{TF}(Z_1)+\cdots+E(Z_K)=(Z_1^{7/3}+\cdots+Z_K^{7/3})E_{TF}(1)\\
 &\ge\max\{Z_1,\ldots,Z_K\}^{7/3}E_{TF}(1)K.
@@ -186,8 +186,12 @@ We are considering states $\psi\in\bigwedge_{n=1}^N(L^2(\R^3)\otimes\C^q)$ antis
 The \vocab{one-particle reduced density matrix of $\psi$} is 
 \begin{align*}
 \gamma_\psi:L^2(\Gamma)&\longrightarrow L^2(\Gamma)\\
-f&\longmapsto \int_\Gamma \psi_\gamma(x,x')f(x')\,dx'
+f&\longmapsto \int_\Gamma \gamma_\psi(x,x')f(x')\,dx',
 \end{align*}
+where
+\begin{equation}
+\gamma_\psi(x,x'):=N\int_{\Gamma^{N-1}}\psi(x,x_2,\ldots,x_N)\overline{\psi(x',x_2,\ldots,x_N)}\,dx_2\cdots\,dx_N.
+\end{equation}
 \end{defn}
 \begin{claim}
 $\gamma_\psi\ge0$.
